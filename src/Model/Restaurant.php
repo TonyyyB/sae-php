@@ -18,26 +18,14 @@ class Restaurant
     private ?bool $vegan;
     private ?bool $delivery;
     private ?bool $takeaway;
-    private array $internetAccess;
-    private ?string $stars;
     private ?string $capacity;
     private ?bool $driveThrough;
-    private ?string $wikidata;
-    private ?string $brandWikidata;
-    private ?string $siret;
     private ?string $phone;
     private ?string $website;
     private ?string $facebook;
-    private ?bool $smoking;
-    private string $comInsee;
-    private string $comNom;
     private string $region;
-    private string $codeRegion;
     private string $departement;
-    private string $codeDepartement;
     private string $commune;
-    private string $codeCommune;
-    private string $osmEdit;
 
     public function __construct(
         float $longitude,
@@ -54,26 +42,14 @@ class Restaurant
         ?bool $vegan,
         ?bool $delivery,
         ?bool $takeaway,
-        array $internetAccess,
-        ?string $stars,
         ?string $capacity,
         ?bool $driveThrough,
-        ?string $wikidata,
-        ?string $brandWikidata,
-        ?string $siret,
         ?string $phone,
         ?string $website,
         ?string $facebook,
-        ?bool $smoking,
-        string $comInsee,
-        string $comNom,
         string $region,
-        string $codeRegion,
         string $departement,
-        string $codeDepartement,
-        string $commune,
-        string $codeCommune,
-        string $osmEdit
+        string $commune
     ) {
         $this->longitude = $longitude;
         $this->latitude = $latitude;
@@ -82,32 +58,21 @@ class Restaurant
         $this->name = $name;
         $this->operator = $operator;
         $this->brand = $brand;
+        $this->openingHours = $this->parseOpeningHours($openingHours);
         $this->wheelchair = $wheelchair;
         $this->cuisine = $cuisine;
         $this->vegetarian = $vegetarian;
         $this->vegan = $vegan;
         $this->delivery = $delivery;
         $this->takeaway = $takeaway;
-        $this->internetAccess = $internetAccess;
-        $this->stars = $stars;
         $this->capacity = $capacity;
         $this->driveThrough = $driveThrough;
-        $this->wikidata = $wikidata;
-        $this->brandWikidata = $brandWikidata;
-        $this->siret = $siret;
         $this->phone = $this->normalizePhoneNumber($phone);
         $this->website = $website;
         $this->facebook = $facebook;
-        $this->smoking = $smoking;
-        $this->comInsee = $comInsee;
-        $this->comNom = $comNom;
         $this->region = $region;
-        $this->codeRegion = $codeRegion;
         $this->departement = $departement;
-        $this->codeDepartement = $codeDepartement;
         $this->commune = $commune;
-        $this->codeCommune = $codeCommune;
-        $this->osmEdit = $osmEdit;
     }
 
     private function normalizePhoneNumber(?string $phone): ?string
@@ -118,57 +83,98 @@ class Restaurant
         return preg_replace('/\s+/', '', $phone);
     }
 
-    public function parseOpeningHours(string|null $hours): array
+    function parseOpeningHours($openingHours)
     {
-        if ($hours === null) {
-            return [];
-        }
-        $daysOfWeek = [
-            'Mo' => 'Lundi',
-            'Tu' => 'Mardi',
-            'We' => 'Mercredi',
-            'Th' => 'Jeudi',
-            'Fr' => 'Vendredi',
-            'Sa' => 'Samedi',
-            'Su' => 'Dimanche',
+        // Initialiser un tableau de 7 jours de la semaine avec des valeurs vides
+        $hours = array_fill(0, 7, "");
+
+        // Associer les abréviations des jours de la semaine à leurs indices
+        $dayMap = [
+            "Mo" => 0,
+            "Tu" => 1,
+            "We" => 2,
+            "Th" => 3,
+            "Fr" => 4,
+            "Sa" => 5,
+            "Su" => 6,
         ];
 
-        $openingHours = [];
-        $periods = explode(';', $hours);
+        // Diviser l'entrée par les points-virgules pour séparer chaque plage de jours et horaires
+        $segments = explode(';', $openingHours);
 
-        foreach ($periods as $period) {
-            $parts = explode(' ', trim($period));
-            $days = $parts[0];
-            $times = $parts[1];
+        foreach ($segments as $segment) {
+            // Supprimer les espaces inutiles et diviser les jours et horaires
+            $segment = trim($segment);
+            if (!$segment)
+                continue;
 
-            if (strpos($days, '-') !== false) {
-                list($startDay, $endDay) = explode('-', $days);
-                $startIndex = array_search($startDay, array_keys($daysOfWeek));
-                $endIndex = array_search($endDay, array_keys($daysOfWeek));
+            list($daysPart, $hoursPart) = explode(' ', $segment, 2);
 
+            // Vérifier si c'est une plage de jours ou un seul jour
+            if (strpos($daysPart, '-') !== false) {
+                // Plage de jours (ex: "Mo-Th")
+                list($startDay, $endDay) = explode('-', $daysPart);
+                $startIndex = $dayMap[$startDay];
+                $endIndex = $dayMap[$endDay];
+
+                // Remplir tous les jours de la plage avec les horaires
                 for ($i = $startIndex; $i <= $endIndex; $i++) {
-                    $openingHours[array_keys($daysOfWeek)[$i]] = $times;
+                    $hours[$i] = $hoursPart;
+                }
+            } elseif (strpos($daysPart, ',') !== false) {
+                // Liste de jours séparés par des virgules (ex: "Mo,We,Fr")
+                $individualDays = explode(',', $daysPart);
+                foreach ($individualDays as $day) {
+                    $dayIndex = $dayMap[$day];
+                    $hours[$dayIndex] = $hoursPart;
                 }
             } else {
-                $openingHours[$days] = $times;
+                // Un seul jour (ex: "Fr")
+                $dayIndex = $dayMap[$daysPart];
+                $hours[$dayIndex] = $hoursPart;
             }
         }
 
-        $fullOpeningHours = [];
-        foreach ($openingHours as $day => $time) {
-            $fullOpeningHours[$daysOfWeek[$day]] = $time;
-        }
-
-        return $fullOpeningHours;
+        return $hours;
     }
 
     public function renderCard(): string
     {
-        return "<div class='restaurant-card'>
-                    <h3>" . ucfirst(str_replace("_", " ", $this->getName())) . "</h3>
-                    <p>Type : " . ucfirst($this->getType()) . "</p>
-                    <p>Note moyenne : ⭐⭐⭐⭐☆</p>
-                </div>";
+        $html = "<div class='restaurant-card'>";
+        $html .= "<h3>";
+        $html .= ucfirst($this->getName());
+        $html .= "</h3><p>Type : ";
+        $html .= ucfirst(str_replace("_", " ", $this->getType()));
+        $html .= "</p>";
+        if (isset($this->openingHours)) {
+            $dayMap = [
+                0 => "Lundi",
+                1 => "Mardi",
+                2 => "Mercredi",
+                3 => "Jeudi",
+                4 => "Vendredi",
+                5 => "Samedi",
+                6 => "Dimanche",
+            ];
+            $html .= "<p>Horaires d'ouverture : ";
+            $html .= "<ul>";
+            foreach ($this->openingHours as $day => $hours) {
+                $html .= "<li>" . $dayMap[$day] . " : " . ($hours ? $hours : "Fermé") . "</li>";
+            }
+            $html .= "</ul>";
+            $html .= "</p>";
+        }
+        if (isset($this->cuisine)) {
+            $html .= "<p>Cuisine : ";
+            $html .= "<ul>";
+            foreach ($this->cuisine as $cuisine) {
+                $html .= "<li>" . ucfirst($cuisine) . "</li>";
+            }
+            $html .= "</ul>";
+            $html .= "</p>";
+        }
+        $html .= "</div>";
+        return $html;
     }
 
     public function getCoordinates(): array
@@ -239,16 +245,6 @@ class Restaurant
         return $this->takeaway;
     }
 
-    public function getInternetAccess(): array
-    {
-        return $this->internetAccess;
-    }
-
-    public function getStars(): ?string
-    {
-        return $this->stars;
-    }
-
     public function getCapacity(): ?string
     {
         return $this->capacity;
@@ -257,21 +253,6 @@ class Restaurant
     public function getDriveThrough(): ?bool
     {
         return $this->driveThrough;
-    }
-
-    public function getWikidata(): ?string
-    {
-        return $this->wikidata;
-    }
-
-    public function getBrandWikidata(): ?string
-    {
-        return $this->brandWikidata;
-    }
-
-    public function getSiret(): string
-    {
-        return $this->siret;
     }
 
     public function getPhone(): string
@@ -289,29 +270,9 @@ class Restaurant
         return $this->facebook;
     }
 
-    public function getSmoking(): ?bool
-    {
-        return $this->smoking;
-    }
-
-    public function getComInsee(): string
-    {
-        return $this->comInsee;
-    }
-
-    public function getComNom(): string
-    {
-        return $this->comNom;
-    }
-
     public function getRegion(): string
     {
         return $this->region;
-    }
-
-    public function getCodeRegion(): string
-    {
-        return $this->codeRegion;
     }
 
     public function getDepartement(): string
@@ -319,23 +280,9 @@ class Restaurant
         return $this->departement;
     }
 
-    public function getCodeDepartement(): string
-    {
-        return $this->codeDepartement;
-    }
-
     public function getCommune(): string
     {
         return $this->commune;
     }
 
-    public function getCodeCommune(): string
-    {
-        return $this->codeCommune;
-    }
-
-    public function getOsmEdit(): string
-    {
-        return $this->osmEdit;
-    }
 }

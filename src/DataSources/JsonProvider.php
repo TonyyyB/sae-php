@@ -14,7 +14,7 @@ class JsonProvider
         $this->jsonFilePath = $jsonFilePath;
     }
 
-    public function loadRestaurants(): array
+    public function loadRestaurants(int $nb = -1): array
     {
         if (!file_exists($this->jsonFilePath)) {
             throw new \Exception("Le fichier JSON n'existe pas.");
@@ -30,8 +30,14 @@ class JsonProvider
 
         $restaurants = [];
 
-        foreach ($data as $restaurantData) {
-            $restaurants[] = $this->mapToRestaurant($restaurantData);
+        if ($nb === -1) {
+            foreach ($data as $restaurantData) {
+                $restaurants[] = $this->mapToRestaurant($restaurantData);
+            }
+        } else {
+            for ($i = 0; $i < min($nb, count($data)); $i++) {
+                $restaurants[] = $this->mapToRestaurant($data[$i]);
+            }
         }
 
         return $restaurants;
@@ -39,7 +45,6 @@ class JsonProvider
 
     private function mapToRestaurant(array $restaurantData): Restaurant
     {
-        Cuisine::create("", "");
         return new Restaurant(
             $restaurantData['geo_point_2d']['lon'],
             $restaurantData['geo_point_2d']['lat'],
@@ -55,26 +60,14 @@ class JsonProvider
             $this->mapToBoolean($restaurantData['vegan']),
             $this->mapToBoolean($restaurantData['delivery']),
             $this->mapToBoolean($restaurantData['takeaway']),
-            $restaurantData['internet_access'] ?? [],
-            $restaurantData['stars'] ?? null,
             $restaurantData['capacity'] ?? null,
             $this->mapToBoolean($restaurantData['drive_through']),
-            $restaurantData['wikidata'] ?? null,
-            $restaurantData['brand_wikidata'] ?? null,
-            $restaurantData['siret'],
             $this->normalizePhoneNumber($restaurantData['phone']),
             $restaurantData['website'],
             $restaurantData['facebook'] ?? null,
-            $this->mapToBoolean($restaurantData['smoking']),
-            $restaurantData['com_insee'],
-            $restaurantData['com_nom'],
             $restaurantData['region'],
-            $restaurantData['code_region'],
             $restaurantData['departement'],
-            $restaurantData['code_departement'],
-            $restaurantData['commune'],
-            $restaurantData['code_commune'],
-            $restaurantData['osm_edit']
+            $restaurantData['commune']
         );
     }
 
