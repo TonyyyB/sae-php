@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - IUTables'O</title>
     <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -28,18 +29,11 @@
         <section class="top-restaurants">
             <h2>Restaurants les mieux notés</h2>
             <div class="restaurant-list">
-                <!-- Exemple de contenu dynamique -->
-                <div class="restaurant-card">
-                    <h3>Le Gourmet d'Orléans</h3>
-                    <p>Type : Cuisine Française</p>
-                    <p>Note moyenne : ⭐⭐⭐⭐☆</p>
-                </div>
-                <div class="restaurant-card">
-                    <h3>Pizza Napoli</h3>
-                    <p>Type : Cuisine Italienne</p>
-                    <p>Note moyenne : ⭐⭐⭐☆☆</p>
-                </div>
-                <!-- Fin du contenu dynamique -->
+                <?php
+                foreach ($restaurants as $restau) {
+                    echo $restau->renderCard();
+                }
+                ?>
             </div>
         </section>
     </main>
