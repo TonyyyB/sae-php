@@ -2,14 +2,15 @@
 declare(strict_types=1);
 namespace Iuto\SaePhp\Controller;
 
+use Iuto\SaePhp\DataSources\DataBaseProvider;
 use Iuto\SaePhp\DataSources\JsonProvider;
 use Iuto\SaePhp\Model\Restaurant;
 class HomeController extends Controller
 {
     public function get(): void
     {
-        $jp = new JsonProvider(__DIR__ . "/../../data/restaurants_orleans.json");
-        $this->render('home', ["restaurants" => $jp->loadRestaurants(5)]);
+        //$jp = new JsonProvider(__DIR__ . "/../../data/restaurants_orleans.json");
+        //$this->render('home', ["restaurants" => $jp->loadRestaurants(5)]);
         /*$rest = new Restaurant(
             44.7475, // longitude
             1.5048, // latitude
@@ -51,5 +52,7 @@ class HomeController extends Controller
             "restaurants" => $rest
         ]);
         print_r($rest->getOpeningHours());*/
+        $dbp = new DataBaseProvider();
+
     }
 }

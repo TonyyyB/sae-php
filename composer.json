@@ -15,5 +15,9 @@
     ],
     "require-dev": {
         "phpunit/phpunit": "^11.5"
+    },
+    "require": {
+        "supabase-php/supabase-client": "^1.0",
+        "vlucas/phpdotenv": "^5.6"
     }
 }

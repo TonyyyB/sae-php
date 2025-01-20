@@ -1,11 +1,16 @@
 <?php
 declare(strict_types=1);
+use Dotenv\Dotenv;
 
 // Charger l'autoloader généré par Composer
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // Démarrer la session
 session_start();
+
+// Charger l'env
+$dotenv = Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
 
 // Charger les routes
 $routes = require_once __DIR__ . '/../config/routes.php';

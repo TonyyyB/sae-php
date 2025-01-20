@@ -4,9 +4,9 @@ namespace Iuto\SaePhp\Model;
 
 class Restaurant
 {
+    private string $osmId;
     private float $longitude;
     private float $latitude;
-    private string $osmId;
     private string $type;
     private string $name;
     private ?string $operator;
