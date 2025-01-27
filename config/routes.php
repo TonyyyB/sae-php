@@ -11,5 +11,11 @@ return [
         'methods' => ['GET'],
         'redirect' => '/',
         'requiresArgument' => true
+    ],
+    '/restaurants' => [
+        'controller' => Iuto\SaePhp\Controller\RestaurantsController::class,
+        'methods' => ['GET', 'POST'],
+        'redirect' => '/',
+        'requiresArgument' => false
     ]
 ];
