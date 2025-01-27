@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - IUTables'O</title>
+    <title>Erreur - IUTables'O</title>
     <link rel="stylesheet" href="/assets/styles.css">
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
 </head>
@@ -22,19 +22,8 @@
         </nav>
     </header>
     <main class="main-content">
-        <section class="intro">
-            <h2>Découvrez les meilleurs restaurants d'Orléans</h2>
-            <p>Explorez, évaluez et partagez vos expériences culinaires grâce à notre site.</p>
-        </section>
-        <section class="top-restaurants">
-            <h2>Restaurants les mieux notés</h2>
-            <div class="restaurant-list">
-                <?php
-                foreach ($restaurants as $restau) {
-                    echo $restau->renderCard();
-                }
-                ?>
-            </div>
+        <section class="error">
+            <h1>Désolé, la page que vous avez demandé n'a pas été trouvée :(</h1>
         </section>
     </main>
     <footer class="footer">

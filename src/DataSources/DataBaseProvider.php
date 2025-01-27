@@ -1,13 +1,15 @@
 <?php
 namespace Iuto\SaePhp\DataSources;
-use Supabase\Functions as Supabase;
+use PDO;
 class DataBaseProvider
 {
-    private Supabase $client;
+    private PDO $pdo;
     public function __construct()
     {
-        $this->client = new Supabase($_ENV['SB_URL'], $_ENV['SB_APIKEY']);
-        print_r($this->getRestaurants());
+        //$this->pdo = new PDO("postgresql:host=" . $_ENV['DB_HOST'] . ";port=" . $_ENV['DB_PORT'] . ";dbname=" . $_ENV['DB_DBNAME'] . ";", $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
+        //$this->pdo = new PDO("postgresql://postgres:saephp2025@db.ioebwciaykdpiupyefrc.supabase.co:5432/postgres");
+        //print_r($this->getRestaurants());
+        //phpinfo();
     }
 
     public function getRestaurants(int $limit = 10): array

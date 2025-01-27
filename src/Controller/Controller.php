@@ -24,11 +24,11 @@ abstract class Controller
         extract($data);
         require_once __DIR__ . '/../../views/' . $view . '.php';
     }
-    public function get(): void
+    public function get(string $param): void
     {
         $this->redirectTo("/");
     }
-    public function post(): void
+    public function post(string $param): void
     {
         $this->redirectTo("/");
     }

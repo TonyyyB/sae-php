@@ -11,7 +11,7 @@ class Restaurant
     private string $name;
     private ?string $operator;
     private ?string $brand;
-    private array $openingHours;
+    private ?array $openingHours;
     private ?bool $wheelchair;
     private array $cuisine;
     private ?bool $vegetarian;
@@ -26,6 +26,7 @@ class Restaurant
     private string $region;
     private string $departement;
     private string $commune;
+    private ?array $avis;
 
     public function __construct(
         float $longitude,
@@ -75,6 +76,22 @@ class Restaurant
         $this->commune = $commune;
     }
 
+    public function setAvis(array $avis): void
+    {
+        $this->avis = $avis;
+    }
+
+    public function getAvis(): ?array
+    {
+        return $this->avis;
+    }
+
+    public function addAvis(Avis $avis): void
+    {
+        $this->avis[] = $avis;
+    }
+
+
     private function normalizePhoneNumber(?string $phone): ?string
     {
         if ($phone === null) {
@@ -83,8 +100,11 @@ class Restaurant
         return preg_replace('/\s+/', '', $phone);
     }
 
-    function parseOpeningHours($openingHours)
+    function parseOpeningHours(?string $openingHours): ?array
     {
+        if ($openingHours === null) {
+            return null;
+        }
         // Initialiser un tableau de 7 jours de la semaine avec des valeurs vides
         $hours = array_fill(0, 7, "");
 
@@ -141,11 +161,13 @@ class Restaurant
     public function renderCard(): string
     {
         $html = "<div class='restaurant-card'>";
-        $html .= "<h3>";
+        $html .= "<a class='restaurant-card-detail' href='/detail/" . $this->osmId . "'><h3>";
         $html .= ucfirst($this->getName());
-        $html .= "</h3><p>Type : ";
+        $html .= "</h3><a><p>Type : ";
         $html .= ucfirst(str_replace("_", " ", $this->getType()));
         $html .= "</p>";
+        $html .= "<p>Horaires d'ouverture : ";
+        $html .= "<ul>";
         if (isset($this->openingHours)) {
             $dayMap = [
                 0 => "Lundi",
@@ -156,15 +178,15 @@ class Restaurant
                 5 => "Samedi",
                 6 => "Dimanche",
             ];
-            $html .= "<p>Horaires d'ouverture : ";
-            $html .= "<ul>";
             foreach ($this->openingHours as $day => $hours) {
                 $html .= "<li>" . $dayMap[$day] . " : " . ($hours ? $hours : "Fermé") . "</li>";
             }
-            $html .= "</ul>";
-            $html .= "</p>";
+        } else {
+            $html .= "<li>Non renseigné</li>";
         }
-        if (isset($this->cuisine)) {
+        $html .= "</ul>";
+        $html .= "</p>";
+        if (isset($this->cuisine) && sizeof($this->cuisine) > 0) {
             $html .= "<p>Cuisine : ";
             $html .= "<ul>";
             foreach ($this->cuisine as $cuisine) {
@@ -173,9 +195,130 @@ class Restaurant
             $html .= "</ul>";
             $html .= "</p>";
         }
+        if (isset($this->avis) && sizeof($this->avis) > 0) {
+            $moyenne = array_sum(array_map(function ($a) {
+                return $a->getNote();
+            }, $this->avis)) / count($this->avis);
+            $pourcentage = ($moyenne / 5) * 100;
+            $html .= "<p>Note : " . round($moyenne, 2) . "/5</p>";
+            $html .= "<div class='stars-container' style='width: 4.5em;'>";
+            $html .= "<div class='stars-background'>";
+            $html .= "★★★★★";
+            $html .= "</div>";
+            $html .= "<div class='stars-filled' style='width: " . $pourcentage . "%;'>";
+            $html .= "★★★★★";
+            $html .= "</div>";
+            $html .= "</div>";
+        }
         $html .= "</div>";
         return $html;
     }
+
+    public function renderDetail(): string
+    {
+        $html = "<h1>" . htmlspecialchars($this->getName()) . "</h1>";
+        $html .= "<p>Type : " . ucfirst(str_replace("_", " ", $this->getType())) . "</p>";
+        $html .= "<h2>Horaires d'ouverture :</h2>";
+        $html .= "<ul class='opening-hours'>";
+        if (isset($this->openingHours)) {
+            $dayMap = [
+                0 => "Lundi",
+                1 => "Mardi",
+                2 => "Mercredi",
+                3 => "Jeudi",
+                4 => "Vendredi",
+                5 => "Samedi",
+                6 => "Dimanche",
+            ];
+            foreach ($this->openingHours as $day => $hours) {
+                $html .= "<li>" . $dayMap[$day] . " : " . ($hours ? $hours : "Fermé") . "</li>";
+            }
+        } else {
+            $html .= "<li>Non renseigné</li>";
+        }
+        $html .= "</ul>";
+
+        if (isset($this->cuisine) && !empty($this->cuisine)) {
+            $html .= "<h2>Cuisine :</h2>";
+            $html .= "<ul>";
+            foreach ($this->cuisine as $cuisine) {
+                $html .= "<li>" . ucfirst($cuisine) . "</li>";
+            }
+            $html .= "</ul>";
+        }
+
+        if (isset($this->avis) && !empty($this->avis)) {
+            $moyenne = array_sum(array_map(function ($a) {
+                return $a->getNote();
+            }, $this->avis)) / count($this->avis);
+            $pourcentage = ($moyenne / 5) * 100;
+            $html .= "<h2>Note moyenne :</h2>";
+            $html .= "<p>" . round($moyenne, 2) . "/5</p>";
+            $html .= "<div class='stars-container' style='width: 4.5em;'>";
+            $html .= "<div class='stars-background'>";
+            $html .= "★★★★★";
+            $html .= "</div>";
+            $html .= "<div class='stars-filled' style='width: " . $pourcentage . "%;'>";
+            $html .= "★★★★★";
+            $html .= "</div>";
+            $html .= "</div>";
+        }
+
+        $options = [];
+        if ($this->vegetarian)
+            $options[] = "Végétarien";
+        if ($this->vegan)
+            $options[] = "Végan";
+        if ($this->delivery)
+            $options[] = "Livraison disponible";
+        if ($this->takeaway)
+            $options[] = "À emporter disponible";
+        if ($this->wheelchair)
+            $options[] = "Accessible en fauteuil roulant";
+        if (!empty($options)) {
+            $html .= "<p><strong>Options :</strong></p><ul>";
+            foreach ($options as $option) {
+                $html .= "<li>$option</li>";
+            }
+            $html .= "</ul>";
+        }
+
+        // Contact (téléphone et site web)
+        if ($this->phone) {
+            $html .= "<p><strong>Téléphone :</strong> <a href='tel:" . htmlspecialchars($this->phone) . "'>" . htmlspecialchars($this->phone) . "</a></p>";
+        }
+        if ($this->website) {
+            $html .= "<p><strong>Site web :</strong> <a href='" . htmlspecialchars($this->website) . "' target='_blank'>" . htmlspecialchars($this->website) . "</a></p>";
+        }
+
+        // Avis
+        if (isset($this->avis) && sizeof($this->avis) > 0) {
+            $html .= "<section class='avis-section'>";
+            $html .= "<h3>Avis des utilisateurs</h3>";
+            foreach ($this->avis as $avis) {
+                $html .= $avis->render();
+            }
+            $html .= Avis::renderForm();
+            $html .= "</section>";
+        } else {
+            $html .= "<p>Aucun avis pour le moment.</p>";
+        }
+
+        // Carte Google Maps
+        $html .= "<div class='map-container'>";
+        $html .= "<iframe
+            src='https://www.google.com/maps?q={$this->latitude},{$this->longitude}&z=15&output=embed'
+            width='100%'
+            height='300'
+            frameborder='0'
+            style='border:0'
+            allowfullscreen
+            aria-hidden='false'
+            tabindex='0'></iframe>";
+        $html .= "</div>";
+        return $html;
+    }
+
 
     public function getCoordinates(): array
     {
@@ -183,6 +326,15 @@ class Restaurant
             'lat' => $this->latitude,
             'lon' => $this->longitude,
         ];
+    }
+
+    public function getLatitude(): float
+    {
+        return $this->latitude;
+    }
+    public function getLongitude(): float
+    {
+        return $this->longitude;
     }
 
     public function getOpeningHours(): array
@@ -255,12 +407,12 @@ class Restaurant
         return $this->driveThrough;
     }
 
-    public function getPhone(): string
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function getWebsite(): string
+    public function getWebsite(): ?string
     {
         return $this->website;
     }

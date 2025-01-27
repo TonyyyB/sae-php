@@ -4,6 +4,7 @@ namespace Iuto\SaePhp\DataSources;
 
 use Iuto\SaePhp\Model\Restaurant;
 use Iuto\SaePhp\Model\Cuisine;
+use Iuto\SaePhp\Model\Avis;
 
 class JsonProvider
 {
@@ -40,7 +41,37 @@ class JsonProvider
             }
         }
 
+        $restaurants[0]->addAvis(new Avis("Moi", "Pas ouf", 1));
+        $restaurants[0]->addAvis(new Avis("Mon ami", "Super", 5));
+        $restaurants[0]->addAvis(new Avis("Mon ami", "Mieux", 4));
+
         return $restaurants;
+    }
+
+    public function getById(string $id): ?Restaurant
+    {
+        if (!file_exists($this->jsonFilePath)) {
+            throw new \Exception("Le fichier JSON n'existe pas.");
+        }
+
+        $jsonData = file_get_contents($this->jsonFilePath);
+
+        $data = json_decode($jsonData, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
+        }
+
+        foreach ($data as $restaurantData) {
+            if ($restaurantData['osm_id'] === $id) {
+                $restau = $this->mapToRestaurant($restaurantData);
+                $restau->addAvis(new Avis("Moi", "Pas ouf", 1));
+                $restau->addAvis(new Avis("Mon ami", "Super", 5));
+                $restau->addAvis(new Avis("Mon ami", "Mieux", 4));
+                return $restau;
+            }
+        }
+        return null;
     }
 
     private function mapToRestaurant(array $restaurantData): Restaurant

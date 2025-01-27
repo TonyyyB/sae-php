@@ -12,21 +12,24 @@ session_start();
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
 
-// Charger les routes
-$routes = require_once __DIR__ . '/../config/routes.php';
-
 // Récupérer l'URL demandée
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Définir le fuseau horaire par défaut
-date_default_timezone_set("Europe/Paris");
+// Trouver une route correspondante (avec gestion des paramètres dynamiques)
+$routes = require_once __DIR__ . '/../config/routes.php';
+
+$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$parts = explode('/', trim($url, '/')); // Divise l'URL en segments
+$basePath = '/' . ($parts[0] ?? ''); // Extrait la partie de base (ex. : "/detail")
+$argument = isset($parts[1]) ? implode('/', array_slice($parts, 1)) : null; // Concatène tout ce qui suit la première partie
 
 // Vérifier si la route existe
-if (isset($routes[$url])) {
-    $route = $routes[$url];
+if (isset($routes[$basePath])) {
+    $route = $routes[$basePath];
     $controllerClass = $route['controller']; // Classe du contrôleur
     $methods = $route['methods']; // Méthodes autorisées (GET, POST, etc.)
     $redirectRelPath = $route['redirect'] ?? '/'; // Redirection par défaut
+    $requiresArgument = $route['requiresArgument']; // Route nécessite un argument ?
 
     // Construire l'URL de redirection complète
     $protocol = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
@@ -39,8 +42,12 @@ if (isset($routes[$url])) {
         exit();
     }
 
-    // Action correspondante à la méthode HTTP (GET, POST, etc.)
-    $action = strtolower($_SERVER['REQUEST_METHOD']);
+    // Si un argument est requis mais absent
+    if ($requiresArgument && !$argument) {
+        http_response_code(400); // Code erreur 400 (bad request)
+        echo "Erreur : argument manquant pour la route {$basePath}.";
+        exit();
+    }
 
     // Vérifier que la classe du contrôleur existe
     if (!class_exists($controllerClass)) {
@@ -54,8 +61,13 @@ if (isset($routes[$url])) {
         $controller = new $controllerClass($redirect);
 
         // Appeler la méthode d'action correspondante
+        $action = strtolower($_SERVER['REQUEST_METHOD']);
         if (method_exists($controller, $action)) {
-            $controller->$action();
+            if ($requiresArgument) {
+                $controller->$action($argument); // Passe l'argument au contrôleur
+            } else {
+                $controller->$action("");
+            }
         } else {
             http_response_code(405);
             echo "Erreur : Méthode {$action} non définie dans le contrôleur.";
@@ -67,5 +79,5 @@ if (isset($routes[$url])) {
 } else {
     // Si aucune route ne correspond
     http_response_code(404);
-    echo "Page non trouvée.";
+    require_once __DIR__ . '/../views/error.php';
 }
