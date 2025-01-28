@@ -1072,7 +1072,7 @@
         "name": "Au Coin Gourmand",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo-We 08:00-21:00; Th-Fr 08:00-22:00,Sa 09:00-22:00",
+        "opening_hours": "Mo-We 08:00-21:00; Th-Fr 08:00-22:00;Sa 09:00-22:00",
         "wheelchair": null,
         "cuisine": [
             "french",
@@ -19136,7 +19136,7 @@
         "name": "Panda Grill",
         "operator": null,
         "brand": null,
-        "opening_hours": "We-Mo 12:00-14:30,19:00-22:30",
+        "opening_hours": "We-Su 12:00-14:30,19:00-22:30; Mo 12:00-14:30,19:00-22:30",
         "wheelchair": null,
         "cuisine": [
             "sushi",

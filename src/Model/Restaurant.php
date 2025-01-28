@@ -167,7 +167,7 @@ class Restaurant
         $html .= ucfirst(str_replace("_", " ", $this->getType()));
         $html .= "</p>";
         $html .= "<p>Horaires d'ouverture : ";
-        $html .= "<ul>";
+        $html .= "<ul class='opening-hours'>";
         if (isset($this->openingHours)) {
             $dayMap = [
                 0 => "Lundi",

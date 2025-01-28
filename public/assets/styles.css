@@ -169,9 +169,9 @@ body {
 }
 
 /* Opening hours */
-.opening-hours ul {
+.opening-hours {
     list-style: none;
-    padding-left: 0;
+    width: 500px;
 }
 
 .opening-hours li {
@@ -254,4 +254,89 @@ form textarea {
 
 ul {
     list-style-type: none;
+}
+
+.container {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; /* Caché par défaut */
+}
+
+.container.active {
+    display: block;
+}
+.dropdown {
+    position: relative;
+    width: 300px;
+}
+
+.dropdown-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-button:hover {
+    background-color: #f9f9f9;
+}
+
+.dropdown-button:after {
+    content: "▼";
+    font-size: 12px;
+    color: #333;
+}
+
+.checkbox-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.checkbox-list.active {
+    display: block;
+}
+
+.checkbox-list li {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.checkbox-list li:last-child {
+    border-bottom: none;
+}
+
+.checkbox-list input[type="checkbox"] {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #4caf50;
+}
+
+.checkbox-list label {
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    flex-grow: 1;
 }
