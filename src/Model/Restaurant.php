@@ -292,17 +292,17 @@ class Restaurant
         }
 
         // Avis
+        $html .= "<section class='avis-section'>";
         if (isset($this->avis) && sizeof($this->avis) > 0) {
-            $html .= "<section class='avis-section'>";
             $html .= "<h3>Avis des utilisateurs</h3>";
             foreach ($this->avis as $avis) {
                 $html .= $avis->render();
             }
-            $html .= Avis::renderForm();
-            $html .= "</section>";
         } else {
             $html .= "<p>Aucun avis pour le moment.</p>";
         }
+        $html .= Avis::renderForm();
+        $html .= "</section>";
 
         // Carte Google Maps
         $html .= "<div class='map-container'>";
