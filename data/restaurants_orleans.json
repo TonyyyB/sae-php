@@ -771,7 +771,7 @@
         "name": "Grec gourmand",
         "operator": null,
         "brand": null,
-        "opening_hours": "Tu-Th 11:00-01:00, Fr 11:00-02:00, Sa 12:00-02:00, Su 12:00-01:00",
+        "opening_hours": "Tu-Th 11:00-01:00; Fr 11:00-02:00; Sa 12:00-02:00; Su 12:00-01:00",
         "wheelchair": "no",
         "cuisine": [
             "kebab"
@@ -1224,7 +1224,7 @@
         "name": "Tex Mex",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo-Th 12:00-15:00,18:00-23:00, Fr 12:00-15:00,18:00-24:00, Sa 12:00-15:30,18:00-23:00",
+        "opening_hours": "Mo-Th 12:00-15:00,18:00-23:00; Fr 12:00-15:00,18:00-24:00; Sa 12:00-15:30,18:00-23:00",
         "wheelchair": null,
         "cuisine": [
             "mexican"
@@ -1569,7 +1569,7 @@
         "name": "Planet Pizza",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo,Tu 11:30-14:00, Mo-Th 18:00-23:00, We,Th 11:30-14:00,18:00-24:00, Fr,Sa 18:00-24:00, Su 11:30-14:00,18:00-23:00",
+        "opening_hours": "Mo-Tu 11:30-14:00; Mo-Th 18:00-23:00; We-Th 11:30-14:00,18:00-24:00; Fr-Sa 18:00-24:00; Su 11:30-14:00,18:00-23:00",
         "wheelchair": "no",
         "cuisine": [
             "pizza"
@@ -4066,7 +4066,7 @@
         "name": "Le Charbon",
         "operator": null,
         "brand": null,
-        "opening_hours": "We,Su,Mo 17:00-01:00, Tu,Th-Sa 17:00-02:00",
+        "opening_hours": "Mo 17:00-01:00; Tu 17:00-02:00; We 17:00-01:00; Th-Sa 17:00-02:00; Su 17:00-01:00",
         "wheelchair": null,
         "cuisine": null,
         "vegetarian": null,
@@ -5062,7 +5062,7 @@
         "name": "Chez Bambino",
         "operator": null,
         "brand": null,
-        "opening_hours": "Tu-Th 12:00-14:00,18:00-23:00, Fr,Sa 12:00-14:00,18:00-24:00, Su 17:00-23:00",
+        "opening_hours": "Tu-Th 12:00-14:00,18:00-23:00; Fr-Sa 12:00-14:00,18:00-24:00; Su 17:00-23:00",
         "wheelchair": null,
         "cuisine": [
             "chicken"
@@ -5164,7 +5164,7 @@
         "name": "O five",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo-Sa 10:00-01:00, Su 12:00-01:00",
+        "opening_hours": "Mo-Sa 10:00-01:00; Su 12:00-01:00",
         "wheelchair": null,
         "cuisine": null,
         "vegetarian": null,
@@ -5413,7 +5413,7 @@
         "name": "Rabiro chiken",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo-Th 11:00-14:00,23:00-03:00, Fr,Su 23:00-03:00",
+        "opening_hours": "Mo-Th 11:00-14:00,23:00-03:00; Fr-Su 23:00-03:00",
         "wheelchair": "no",
         "cuisine": [
             "chicken"
@@ -6531,7 +6531,7 @@
         "name": "Mon th\u00e9 cristaux",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo-Sa 14:00-02:00, Su 16:00-02:00",
+        "opening_hours": "Mo-Sa 14:00-02:00; Su 16:00-02:00",
         "wheelchair": "no",
         "cuisine": [
             "coffee_shop",
@@ -6783,7 +6783,7 @@
         "name": "Chez Fa",
         "operator": null,
         "brand": null,
-        "opening_hours": "Tu 12:00-14:00,We 19:30-22:00,Th-Sa 12:00-14:00; Su 18:15-22:00",
+        "opening_hours": "Tu 12:00-14:00; We 19:30-22:00; Th-Sa 12:00-14:00; Su 18:15-22:00",
         "wheelchair": null,
         "cuisine": [
             "african",
@@ -7184,7 +7184,7 @@
         "name": "Le Lut\u00e9tia",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo-Sa 08:00-20:00,Su 08:30-19:30",
+        "opening_hours": "Mo-Sa 08:00-20:00; Su 08:30-19:30",
         "wheelchair": "yes",
         "cuisine": null,
         "vegetarian": null,
@@ -8290,7 +8290,7 @@
         "name": "Le Taj Mahal",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo,We-Sa 11:30-14:30, We-Sa 18:30-22:30, Tu 18:30-22:30",
+        "opening_hours": "Mo 11:30-14:30; We-Sa 11:30-14:30,18:30-22:30; Tu 18:30-22:30",
         "wheelchair": "no",
         "cuisine": [
             "indian"
@@ -9386,7 +9386,7 @@
         "name": "Fast Burger",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo-Th 11:00-14:00,18:00-24:00, Fr 11:00-13:00,18:00-01:00, Su 18:00-24:00",
+        "opening_hours": "Mo-Th 11:00-14:00,18:00-24:00; Fr 11:00-13:00,18:00-01:00; Su 18:00-24:00",
         "wheelchair": "no",
         "cuisine": null,
         "vegetarian": null,
@@ -9535,7 +9535,7 @@
         "name": "La Concurrence",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo-We 12:00-15:00, Th-Sa 12:00-01:00, Su 11:30-21:00",
+        "opening_hours": "Mo-We 12:00-15:00; Th-Sa 12:00-01:00; Su 11:30-21:00",
         "wheelchair": null,
         "cuisine": null,
         "vegetarian": null,
@@ -11977,7 +11977,7 @@
         "name": "Mister Tacos",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo-Fr 11:30-14:00,18:30-22:00, Fr,Sa 11:30-14:00,18:30-23:00",
+        "opening_hours": "Mo-Fr 11:30-14:00,18:30-22:00; Fr 11:30-14:00,18:30-23:00;Sa 11:30-14:00,18:30-23:00",
         "wheelchair": "no",
         "cuisine": null,
         "vegetarian": null,
@@ -14880,7 +14880,7 @@
         "name": "Chez moi",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo-Sa 09:00-03:00, Su 11:30-03:00",
+        "opening_hours": "Mo-Sa 09:00-03:00; Su 11:30-03:00",
         "wheelchair": null,
         "cuisine": null,
         "vegetarian": null,
@@ -17587,7 +17587,7 @@
         "name": "L'Italien",
         "operator": null,
         "brand": null,
-        "opening_hours": "Mo 19:00-00:00; Tu-Fr 11:00-14:30,19:00-00:00,Sa-Su 19:00-00:00",
+        "opening_hours": "Mo 19:00-00:00; Tu-Fr 11:00-14:30,19:00-00:00; Sa-Su 19:00-00:00",
         "wheelchair": null,
         "cuisine": [
             "pizza",
@@ -18292,7 +18292,7 @@
         "name": "Le Key West",
         "operator": null,
         "brand": null,
-        "opening_hours": "Tu-Sa 17:00-01:00, Su,Mo 17:00-23:00",
+        "opening_hours": "Tu-Sa 17:00-01:00; Su-Mo 17:00-23:00",
         "wheelchair": "no",
         "cuisine": null,
         "vegetarian": null,
