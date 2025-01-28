@@ -11,5 +11,11 @@ return [
         'methods' => ['GET'],
         'redirect' => '/',
         'requiresArgument' => true
+    ],
+    '/login' => [
+        'controller' => Iuto\SaePhp\Controller\LoginController::class,
+        'methods' => ['GET', 'POST'],
+        'redirect' => '/',
+        'requiresArgument' => false
     ]
 ];

@@ -23,12 +23,18 @@
     </header>
     <main class="main-content">
         <section class="error">
-            <h1>Désolé, la page que vous avez demandé n'a pas été trouvée :(</h1>
+            <?php
+            if (isset($erreur)) {
+                echo "<h1>Une erreur s'est produite : " . $erreur . "</h1>";
+            } else {
+                echo "<h1>Désolé, la page que vous avez demandé n'a pas été trouvée :(</h1>";
+            }
+            ?>
         </section>
     </main>
     <footer class="footer">
         <p>&copy; 2025 IUTables'O. Tous droits réservés.</p>
     </footer>
-</body> 
+</body>
 
 </html>

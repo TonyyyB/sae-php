@@ -8,6 +8,11 @@ class Avis
     private int $note;
     public function __construct(string $utilisateur, string $commentaire, int $note)
     {
+        if ($note <= 0) {
+            throw new \Exception("La note doit être un entier positif.");
+        } else if ($note > 5) {
+            throw new \Exception("La note doit être inférieure ou égale à 5.");
+        }
         $this->utilisateur = $utilisateur;
         $this->commentaire = $commentaire;
         $this->note = $note;
