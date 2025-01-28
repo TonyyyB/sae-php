@@ -160,6 +160,40 @@ body {
     border-radius: 5px;
 }
 
+/* Register */
+.register {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-table{
+    width: 100%;
+    padding: 20px;
+}
+
+.register-field{
+    padding: 10px 20px;
+    width: 85%;
+}
+
+.register-label{
+    text-align: left;
+    width: 20%;
+    padding: 10px 10px;
+    white-space: nowrap;
+}
+
+.register-button{
+    width: 150px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
 /* Detail */
 /* Restaurant Detail */
 .restaurant-detail {
