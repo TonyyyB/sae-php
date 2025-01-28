@@ -307,7 +307,7 @@ class Restaurant
         // Carte Google Maps
         $html .= "<div class='map-container'>";
         $html .= "<iframe
-            src='https://www.google.com/maps?q={$this->latitude},{$this->longitude}&z=15&output=embed'
+            src='https://www.google.com/maps?q=" . htmlspecialchars($this->name) . ",{$this->commune},{$this->departement},{$this->region}&z=15&output=embed'
             width='100%'
             height='300'
             frameborder='0'
