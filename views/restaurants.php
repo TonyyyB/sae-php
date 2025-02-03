@@ -7,9 +7,15 @@
     <title>Accueil - IUTables'O</title>
     <link rel="stylesheet" href="/assets/styles.css">
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+    <script src="/assets/script.js"></script>
 </head>
 
 <body>
+    <?php
+        $cuisines = array_map(fn($p) => $p->cuisine, $restaurants);
+        echo $cuisines;
+    ?>
+
     <header class="header">
         <h1 class="header-title">Bienvenue sur IUTables'O</h1>
         <nav class="nav">
@@ -76,28 +82,4 @@
         <p>&copy; 2025 IUTables'O. Tous droits réservés.</p>
     </footer>
 </body>
-
-<script>
-    // Fonction pour afficher/masquer le conteneur
-    function toggleContainer() {
-        const container = document.getElementById('container');
-        container.classList.toggle('active');
-    }
-
-    // Fonction pour afficher/masquer une liste déroulante spécifique
-    function toggleDropdown(button) {
-        const list = button.nextElementSibling;
-        list.classList.toggle('active');
-    }
-
-    // Fermer toutes les listes déroulantes si on clique en dehors
-    document.addEventListener('click', function (event) {
-        const dropdowns = document.querySelectorAll('.checkbox-list');
-        const buttons = document.querySelectorAll('.dropdown-button');
-        if (![...buttons].some(button => button.contains(event.target))) {
-            dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
-        }
-    });
-</script>
-
 </html>
