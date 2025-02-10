@@ -11,11 +11,6 @@
 </head>
 
 <body>
-    <?php
-        $cuisines = array_map(fn($p) => $p->cuisine, $restaurants);
-        echo $cuisines;
-    ?>
-
     <header class="header">
         <h1 class="header-title">Bienvenue sur IUTables'O</h1>
         <nav class="nav">
