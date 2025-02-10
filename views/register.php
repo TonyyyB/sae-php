@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register - IUTables'O</title>
+    <title>Register - IUTables'O</title>
     <link rel="stylesheet" href="/assets/styles.css">
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
 </head>
@@ -27,32 +27,35 @@
             <form action="/register" method="post">
                 <table class="register-table">
                     <tr>
-                        <td class="register-label">Email:</td>
+                        <td class="register-label">
+                            <p>Email:</p>
+                        </td>
                         <td><input type="email" name="email" class="register-field" required></td>
                     </tr>
                     <tr>
-                        <td class="register-label">nom:</td>
+                        <td class="register-label">
+                            <p>Nom:</p>
+                        </td>
                         <td><input type="text" name="Nom" class="register-field" required></td>
                     </tr>
                     <tr>
-                        <td class="register-label">prenom:</td>
+                        <td class="register-label">
+                            <p>Prenom:</p>
+                        </td>
                         <td><input type="text" name="Prénom" class="register-field" required></td>
                     </tr>
                     <tr>
-                        <td class="register-label">telephone:</td>
-                        <td><input type="text" name="phone" class="register-field" required></td>
+                        <td class="register-label">
+                            <p>Mot de passe:</p>
+                        </td>
+                        <td><input type="password" name="password" id="password" class="register-field" required></td>
                     </tr>
                     <tr>
-                        <td class="register-label">adresse:</td>
-                        <td><input type="text" name="adresse" class="register-field" required></td>
-                    </tr>
-                    <tr>
-                        <td class="register-label">codepostal:</td>
-                        <td><input type="text" name="codepostal" class="register-field" required></td>
-                    </tr>
-                    <tr>
-                        <td class="register-label">Mot de passe:</td>
-                        <td><input type="password" name="password" class="register-field" required></td>
+                        <td class="register-label">
+                            <p>Confirmer mot de passe:</p>
+                            <span id='message'></span>
+                        </td>
+                        <td><input type="password" name="confirm_password" id="confirm_password" class="register-field" onkeyup='check();' required></td>
                     </tr>
                     <tr>
                         <td class="register-label"></td>
@@ -65,6 +68,18 @@
     <footer class="footer">
         <p>&copy; 2025 IUTables'O. Tous droits réservés.</p>
     </footer>
+    <script>
+        var check = function() {
+            if (document.getElementById('password').value ==
+                document.getElementById('confirm_password').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'matching';
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'not matching';
+            }
+        }
+    </script>
 </body>
 
 </html>
