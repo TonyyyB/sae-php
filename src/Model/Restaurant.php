@@ -175,19 +175,20 @@ class Restaurant
             6 => "Dimanche",
         ];
         foreach ($this->openingHours as $day => $hours) {
-            $html .= "<tr>";
-            $html .= "<td>" . $dayMap[$day] . "</td>";
+            $class = ($pretty ? ("opening-hours-row-" . ($day % 2 == 0 ? "even" : "odd")) : "");
+            $parts = explode(",", $hours);
+            $html .= "<tr class='". $class."'>";
+            $html .= "<td rowspan=".count($parts).">" . $dayMap[$day] . "</td>";
             if($hours === ""){
                 $html .= "<td>Fermé</td>";
                 $html .= "</tr>";
                 continue;
             }
-            $parts = explode(",", $hours);
             $html .= "<td>" . $parts[0] . "</td></tr>";
             if(count($parts) > 1){
                 array_shift($parts);
                 foreach ($parts as $part) {
-                    $html .= "<tr><td></td><td>" . $part . "</td></tr>";
+                    $html .= "<tr class='".$class."'><td>" . $part . "</td></tr>";
                 }
             }
             $html .= "</tr>";
@@ -295,7 +296,7 @@ class Restaurant
         
         $html .= "</div><div class='restaurant-hours'>";
         $html .= "<h2>Horaires d'ouverture</h2>";
-        $html .= $this->renderOpeningHours();
+        $html .= $this->renderOpeningHours(true);
         $html .= "</div></div>";
 
 

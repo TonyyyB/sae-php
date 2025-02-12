@@ -81,21 +81,16 @@ body {
     text-align: left;
 }
 
-.opening-hours-table th, .opening-hours-table td {
+.opening-hours-table-pretty td {
     border: 1px solid #ddd;
     padding: 12px;
 }
 
-.opening-hours-table th {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.opening-hours-table tr:nth-child(even) {
+.opening-hours-table-pretty .opening-hours-row-even {
     background-color: #f2f2f2;
 }
 
-.opening-hours-table tr:hover {
+.opening-hours-table-pretty tr:hover {
     background-color: #ddd;
 }
 
@@ -190,7 +185,7 @@ body {
 
 /* Mise en page responsive */
 @media (min-width: 768px) {
-    .restaurant-detail {
+    .restaurant-general {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
@@ -206,7 +201,7 @@ body {
 }
 
 @media (min-width: 1024px) {
-    .restaurant-detail {
+    .restaurant-general {
         grid-template-columns: 2fr 1fr;
     }
     .map-container {
