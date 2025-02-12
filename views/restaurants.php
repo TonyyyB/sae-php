@@ -28,7 +28,6 @@
             <p>Explorez, évaluez et partagez vos expériences culinaires grâce à notre site.</p>
         </section>
         <section class="top-restaurants">
-            <h2>Liste des restaurants</h2>
             <form method="GET" action="/restaurants" class="filter-form">
                 <div class="filter-container">
                     <h2 class="filter-title">Filtrer les Restaurants</h2>
@@ -69,8 +68,8 @@
                         </div>
                     </div>
 
-                    <button class="filter-submit">Rechercher</button>
                     <button class="filter-clear" onclick="clearFilters()">Enlever les filtres</button>
+                    <button class="filter-submit">Rechercher</button>
                 </div>
 
             </form>

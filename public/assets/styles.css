@@ -322,7 +322,7 @@ form input, form textarea {
 
 .checkbox-list.active {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Colonnes flexibles */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colonnes flexibles */
     gap: 10px;
     overflow-y: auto;
     max-height: 300px;
@@ -333,13 +333,6 @@ form input, form textarea {
     display: flex;
     align-items: center;
     white-space: nowrap; /* Empêche le texte de passer à la ligne */
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    .checkbox-grid {
-        grid-template-columns: 1fr; /* Passe en colonne unique sur mobile */
-    }
 }
 
 .checkbox-list li {
