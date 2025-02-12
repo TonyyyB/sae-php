@@ -5,14 +5,13 @@ use Iuto\SaePhp\DataSources\JsonProvider;
 
 class DetailController extends Controller
 {
-    public function get(string $param): void
+    public function get(): void
     {
-        parse_str($param,$params);
-        if(!isset($params["id"])){
+        if(!isset($$_GET["id"])){
             $this->redirectTo('/');
         }
         $jp = new JsonProvider(__DIR__ . "/../../data/restaurants_orleans.json");
-        $restau = $jp->getById($params['id']);
+        $restau = $jp->getById($_GET['id']);
         if(!$restau){
             $this->redirectTo('/');
         }

@@ -9,6 +9,15 @@ use Iuto\SaePhp\Model\Avis;
 class JsonProvider
 {
     private string $jsonFilePath;
+    private array $restaurants = [];
+    private array $types = [];
+    private array $cuisines = [];
+    private array $options = [
+        "wheelchair" => "Accessibilité fauteuil roulant",
+        "vegetarian" => "Végétarien",
+        "vegan" => "Végan",
+        "delivery" => "Livraison"
+    ];
 
     public function __construct(string $jsonFilePath)
     {
@@ -29,23 +38,23 @@ class JsonProvider
             throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
         }
 
-        $restaurants = [];
+        $this->restaurants = [];
 
         if ($nb === -1) {
             foreach ($data as $restaurantData) {
-                $restaurants[] = $this->mapToRestaurant($restaurantData);
+                $this->restaurants[] = $this->mapToRestaurant($restaurantData);
             }
         } else {
             for ($i = 0; $i < min($nb, count($data)); $i++) {
-                $restaurants[] = $this->mapToRestaurant($data[$i]);
+                $this->restaurants[] = $this->mapToRestaurant($data[$i]);
             }
         }
 
-        $restaurants[0]->addAvis(new Avis("Moi", "Pas ouf", 1));
-        $restaurants[0]->addAvis(new Avis("Mon ami", "Super", 5));
-        $restaurants[0]->addAvis(new Avis("Mon ami", "Mieux", 4));
+        $this->restaurants[0]->addAvis(new Avis("Moi", "Pas ouf", 1));
+        $this->restaurants[0]->addAvis(new Avis("Mon ami", "Super", 5));
+        $this->restaurants[0]->addAvis(new Avis("Mon ami", "Mieux", 4));
 
-        return $restaurants;
+        return $this->restaurants;
     }
 
     public function getById(string $id): ?Restaurant
@@ -119,5 +128,35 @@ class JsonProvider
             return null;
         }
         return preg_replace('/\s+/', '', $phone);
+    }
+
+    public function getCuisines(bool $forceLoad = false): array
+    {
+        if (!isset($this->cuisines) || $forceLoad) {
+            $this->loadRestaurants();
+        }
+        $this->cuisines = [];
+        foreach ($this->restaurants as $restaurant) {
+            $this->cuisines = array_unique(array_merge($this->cuisines, $restaurant->getCuisine()), SORT_REGULAR);
+        }
+        return $this->cuisines;
+    }
+
+    public function getTypes(bool $forceLoad = false): array
+    {
+        if (!isset($this->types) || $forceLoad) {
+            $this->loadRestaurants();
+        }
+        $this->types = [];
+        foreach ($this->restaurants as $restaurant) {
+            $this->types[] = $restaurant->getType();
+            $this->types = array_unique($this->types, SORT_REGULAR);
+        }
+        return $this->types;
+    }
+
+    public function getOptions(): array
+    {
+        return $this->options;
     }
 }

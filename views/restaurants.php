@@ -29,40 +29,50 @@
         </section>
         <section class="top-restaurants">
             <h2>Liste des restaurants</h2>
-            <form>
-                <div class="toggle-container" onclick="toggleContainer()">Afficher les listes</div>
-                <div class="container" id="container">
-                    <!-- Première liste -->
+            <form method="GET" action="/restaurants" class="filter-form">
+                <div class="filter-container">
+                    <h2 class="filter-title">Filtrer les Restaurants</h2>
+
+                    <!-- Type de restaurant -->
                     <div class="dropdown">
-                        <div class="dropdown-button" onclick="toggleDropdown(this)">Liste 1</div>
-                        <ul class="checkbox-list">
-                            <li><label><input type="checkbox"> Option 1.1</label></li>
-                            <li><label><input type="checkbox"> Option 1.2</label></li>
-                            <li><label><input type="checkbox"> Option 1.3</label></li>
-                        </ul>
+                        <div class="dropdown-button">Type de restaurant</div>
+                        <div class="checkbox-list">
+                            <?php
+                                foreach($types as $type){
+                                    echo "<li class='checkbox-item'><label><input type='checkbox' name='type[]' value='{$type}' ".(isset($selected["type"]) ? (in_array($type, $selected["type"]) ? "checked" : "") : "").">".htmlspecialchars(str_replace("_"," ",ucfirst($type)))."</label></li>";
+                                }
+                            ?>
+                        </div>
                     </div>
 
-                    <!-- Deuxième liste -->
+                    <!-- Type de cuisine -->
                     <div class="dropdown">
-                        <div class="dropdown-button" onclick="toggleDropdown(this)">Liste 2</div>
-                        <ul class="checkbox-list">
-                            <li><label><input type="checkbox"> Option 2.1</label></li>
-                            <li><label><input type="checkbox"> Option 2.2</label></li>
-                            <li><label><input type="checkbox"> Option 2.3</label></li>
-                        </ul>
+                        <div class="dropdown-button">Type de cuisine</div>
+                        <div class="checkbox-list">
+                            <?php
+                                foreach($cuisines as $cuisine){
+                                    echo "<li class='checkbox-item'><label><input type='checkbox' name='cuisine[]' value='{$cuisine}' ".(isset($selected["cuisine"]) ? (in_array($cuisine, $selected["cuisine"]) ? "checked" : "") : "").">".htmlspecialchars(str_replace("_"," ",ucfirst($cuisine)))."</label></li>";
+                                }
+                            ?>
+                        </div>
                     </div>
 
-                    <!-- Troisième liste -->
+                    <!-- Options -->
                     <div class="dropdown">
-                        <div class="dropdown-button" onclick="toggleDropdown(this)">Liste 3</div>
-                        <ul class="checkbox-list">
-                            <li><label><input type="checkbox"> Option 3.1</label></li>
-                            <li><label><input type="checkbox"> Option 3.2</label></li>
-                            <li><label><input type="checkbox"> Option 3.3</label></li>
-                        </ul>
+                        <div class="dropdown-button">Options</div>
+                        <div class="checkbox-list">
+                        <?php
+                                foreach($options as $id => $nom){
+                                    echo "<li class='checkbox-item'><label><input type='checkbox' name='option[]' value='{$id}' ".(isset($selected["option"]) ? (in_array($id, $selected["option"]) ? "checked" : "") : "").">".htmlspecialchars(str_replace("_"," ",ucfirst($nom)))."</label></li>";
+                                }
+                            ?>
+                        </div>
                     </div>
+
+                    <button class="filter-submit">Rechercher</button>
+                    <button class="filter-clear" onclick="clearFilters()">Enlever les filtres</button>
                 </div>
-                <button type="submit"> Chercher </button>
+
             </form>
             <div class="restaurant-list">
                 <?php
@@ -77,4 +87,5 @@
         <p>&copy; 2025 IUTables'O. Tous droits réservés.</p>
     </footer>
 </body>
+
 </html>

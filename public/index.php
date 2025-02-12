@@ -51,7 +51,7 @@ if (isset($routes[$basePath])) {
         // Appeler la méthode d'action correspondante
         $action = strtolower($_SERVER['REQUEST_METHOD']);
         if (method_exists($controller, $action)) {
-                $controller->$action($url['query'] ?? '');
+                $controller->$action();
         } else {
             http_response_code(405);
             echo "Erreur : Méthode {$action} non définie dans le contrôleur.";

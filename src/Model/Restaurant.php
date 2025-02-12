@@ -206,7 +206,7 @@ class Restaurant
         $html .= ucfirst(str_replace("_", " ", $this->getType()));
         $html .= "</p>";
         $html .= "<p>Horaires d'ouverture : ";
-        $html .= $this->renderOpeningHours();
+        $html .= $this->renderOpeningHours(true);
         $html .= "</p>";
         if (isset($this->cuisine) && sizeof($this->cuisine) > 0) {
             $html .= "<p>Cuisine : ";
