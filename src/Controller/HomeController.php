@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function get(): void
     {
-        $jp = new JsonProvider(__DIR__ . "/../../data/restaurants_orleans.json");
+        $jp = new JsonProvider();
         $this->render('home', ["restaurants" => $jp->loadRestaurants(5)]);
     }
 }

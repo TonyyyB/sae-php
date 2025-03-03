@@ -10,7 +10,7 @@ class DetailController extends Controller
         if(!isset($_GET["id"])){
             $this->redirectTo('/');
         }
-        $jp = new JsonProvider(__DIR__ . "/../../data/restaurants_orleans.json");
+        $jp = new JsonProvider();
         $restau = $jp->getById($_GET['id']);
         if(!$restau){
             $this->redirectTo('/');

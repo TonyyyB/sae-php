@@ -22,5 +22,11 @@ return [
         'methods' => ['GET', 'POST'],
         'redirect' => '/',
         'requiresArgument' => false
+    ],
+    '/register' => [
+        'controller' => Iuto\SaePhp\Controller\RegisterController::class,
+        'methods' => ['GET', 'POST'],
+        'redirect' => '/',
+        'requiresArgument' => false
     ]
 ];

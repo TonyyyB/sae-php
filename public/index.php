@@ -60,8 +60,7 @@ if (isset($routes[$basePath])) {
             http_response_code(405);
             echo "Erreur : Méthode {$action} non définie dans le contrôleur.";
         }
-    } catch (Exception $e) {
-        $erreur = $e->getMessage();
+    } catch (Throwable $erreur) {
         http_response_code(500);
         require_once __DIR__ . '/../views/error.php';
     }
