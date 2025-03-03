@@ -64,6 +64,36 @@ body {
     margin-top: 30px;
 }
 
+.opening-hours-table {
+    margin: 20px 0;
+}
+
+.opening-hours-table th, .opening-hours-table td {
+    padding: 8px;
+    text-align: left;
+}
+
+.opening-hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.opening-hours-table-pretty td {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+.opening-hours-table-pretty .opening-hours-row-even {
+    background-color: #f2f2f2;
+}
+
+.opening-hours-table-pretty tr:hover {
+    background-color: #ddd;
+}
+
 .restaurant-list {
     display: flex;
     flex-wrap: wrap;
@@ -161,78 +191,88 @@ body {
 }
 
 /* Detail */
-/* Restaurant Detail */
+/* Conteneur principal */
 .restaurant-detail {
-    width: 80%;
+    max-width: 1200px;
+    width: 90%;
     margin: 20px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
-.restaurant-detail h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
+.restaurant-general {
+    display: contents;
+}
+
+.restaurant-info {
+    text-align: left;
+    width: 100%;
+}
+
+.restaurant-hours {
+    width: 70%;
+}
+
+/* Mise en page responsive */
+@media (min-width: 768px) {
+    .restaurant-general {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    .restaurant-info {
+        grid-column: span 1;
+    }
+    
+    .map-container {
+        grid-column: span 2;
+    }
+}
+
+@media (min-width: 1024px) {
+    .restaurant-general {
+        grid-template-columns: 2fr 1fr;
+    }
+    .map-container {
+        grid-column: span 1;
+    }
+}
+
+/* Titres */
+.restaurant-detail h1, .restaurant-detail h2 {
     color: #4CAF50;
+    margin-bottom: 10px;
 }
 
+/* Paragraphe */
 .restaurant-detail p {
     font-size: 1.1rem;
     line-height: 1.6;
     color: #555;
 }
 
-.restaurant-detail p strong {
-    font-weight: bold;
-    color: #333;
+/* Options */
+.options-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.options-list li {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
-/* Map */
-.map-container {
-    margin: 20px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 300px;
-    border: none;
-}
-
-/* Opening hours */
-.opening-hours ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.opening-hours li {
-    margin: 5px 0;
-}
-
-/* Cuisine */
-.cuisine-list ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.cuisine-list li {
-    margin: 5px 0;
-}
-
-/* Avis Section */
+/* Section avis */
 .avis-section {
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #ddd;
-}
-
-.avis-section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #4CAF50;
 }
 
 .avis-section .avis {
@@ -243,14 +283,20 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.avis-section .avis p {
-    margin: 5px 0;
+/* Google Maps */
+.map-container {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.avis-section .avis .stars-container {
-    font-size: 1.5rem;
+.map-container iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
 }
 
+/* Formulaire avis */
 .avis-textarea{
     width: 90%;
 }
@@ -260,36 +306,96 @@ form div {
     margin-bottom: 15px;
 }
 
-form label {
-    font-weight: bold;
-}
-
-form input, form textarea, form select {
+form input, form textarea {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
 
-form textarea {
-    height: 100px;
+.container.active {
+    display: block;
+}
+.dropdown {
+    position: relative;
+    width: 100%;
 }
 
-.add-avis-btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+.dropdown-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.add-avis-btn:hover {
-    background-color: #45a049;
+.dropdown-button:hover {
+    background-color: #f9f9f9;
 }
 
-ul {
-    list-style-type: none;
+.dropdown-button:after {
+    content: "▼";
+    font-size: 12px;
+    color: #333;
+}
+
+.checkbox-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.checkbox-list.active {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colonnes flexibles */
+    gap: 10px;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+/* Style des éléments de la grille */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+}
+
+.checkbox-list li {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.checkbox-list li:last-child {
+    border-bottom: none;
+}
+
+.checkbox-list input[type="checkbox"] {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #4caf50;
+}
+
+.checkbox-list label {
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    flex-grow: 1;
 }
