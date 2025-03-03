@@ -77,9 +77,9 @@ class JsonProvider
         foreach ($data as $restaurantData) {
             if (substr($restaurantData['osm_id'], 5) === $id) {
                 $restau = $this->mapToRestaurant($restaurantData);
-                $restau->addAvis(new Avis("Moi", "Pas ouf", 1));
-                $restau->addAvis(new Avis("Mon ami", "Super", 5));
-                $restau->addAvis(new Avis("Mon ami", "Mieux", 4));
+                //$restau->addAvis(new Avis("Moi", "Pas ouf", 1));
+                $restau->addAvis(new Avis("Mon ami", "Super", 4));
+                $restau->addAvis(new Avis("Mon ami", "Mieux", 5));
                 return $restau;
             }
         }
