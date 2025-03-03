@@ -38,6 +38,13 @@
                         <td class="login-label"></td>
                         <td><input type="submit" value="Se connecter" class="login-button login-field"></td>
                     </tr>
+                    <?php if (isset($err)):?>
+                    <tr>
+                        <td colspan="2">
+                            <span><?=$err?></span>
+                        </td>
+                    </tr>
+                    <?php endif;?>
                 </table>
                 </table>
             </form>

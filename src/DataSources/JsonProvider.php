@@ -5,23 +5,26 @@ namespace Iuto\SaePhp\DataSources;
 use Iuto\SaePhp\Model\Restaurant;
 use Iuto\SaePhp\Model\Cuisine;
 use Iuto\SaePhp\Model\Avis;
+use Iuto\SaePhp\Model\User;
 
 class JsonProvider
 {
-    private string $jsonFilePath;
+    private string $restaurantsFilePath = "../data/restaurants_orleans.json";
+    private string $usersFilePath = "../data/users.json";
 
-    public function __construct(string $jsonFilePath)
+    public function __construct(string $jsonFilePath = "", string $usersFilePath = "")
     {
-        $this->jsonFilePath = $jsonFilePath;
+        if(!empty($jsonFilePath)) $this->restaurantsFilePath = $jsonFilePath;
+        if(!empty($usersFilePath)) $this->usersFilePath = $usersFilePath;
     }
 
     public function loadRestaurants(int $nb = -1): array
     {
-        if (!file_exists($this->jsonFilePath)) {
+        if (!file_exists($this->restaurantsFilePath)) {
             throw new \Exception("Le fichier JSON n'existe pas.");
         }
 
-        $jsonData = file_get_contents($this->jsonFilePath);
+        $jsonData = file_get_contents($this->restaurantsFilePath);
 
         $data = json_decode($jsonData, true);
 
@@ -50,11 +53,11 @@ class JsonProvider
 
     public function getById(string $id): ?Restaurant
     {
-        if (!file_exists($this->jsonFilePath)) {
+        if (!file_exists($this->restaurantsFilePath)) {
             throw new \Exception("Le fichier JSON n'existe pas.");
         }
 
-        $jsonData = file_get_contents($this->jsonFilePath);
+        $jsonData = file_get_contents($this->restaurantsFilePath);
 
         $data = json_decode($jsonData, true);
 
@@ -69,6 +72,41 @@ class JsonProvider
                 $restau->addAvis(new Avis("Mon ami", "Super", 4));
                 $restau->addAvis(new Avis("Mon ami", "Mieux", 5));
                 return $restau;
+            }
+        }
+        return null;
+    }
+
+    public function addUser(User $user): bool
+    {
+        $users = json_decode(file_get_contents($this->usersFilePath), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
+        }
+
+        foreach ($users as $currUser) {
+            if ($currUser["email"] === $user->getEmail()) {
+                return false;
+            }
+        }
+
+        $users[] = $user->toArray();
+        file_put_contents($this->usersFilePath, json_encode($users, JSON_PRETTY_PRINT));
+        return true;
+    }
+
+    public function getUser(string $email, string $password): ?User
+    {
+        $users = json_decode(file_get_contents($this->usersFilePath), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
+        }
+
+        $hashed = hash("sha256", $password);
+
+        foreach ($users as $currUser) {
+            if ($currUser["email"] === $email && $currUser["mdp"] === $hashed) {
+                return User::fromArray($currUser);
             }
         }
         return null;

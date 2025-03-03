@@ -17,7 +17,7 @@
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/restaurants">Restaurants</a></li>
                 <li><a href="/login">Connexion</a></li>
-                <li><a href="/register">register</a></li>
+                <li><a href="/register">Inscription</a></li>
             </ul>
         </nav>
     </header>
@@ -36,19 +36,19 @@
                         <td class="register-label">
                             <p>Nom:</p>
                         </td>
-                        <td><input type="text" name="Nom" class="register-field" required></td>
+                        <td><input type="text" name="nom" class="register-field" required></td>
                     </tr>
                     <tr>
                         <td class="register-label">
                             <p>Prenom:</p>
                         </td>
-                        <td><input type="text" name="Prénom" class="register-field" required></td>
+                        <td><input type="text" name="prenom" class="register-field" required></td>
                     </tr>
                     <tr>
                         <td class="register-label">
                             <p>Mot de passe:</p>
                         </td>
-                        <td><input type="password" name="password" id="password" class="register-field" required></td>
+                        <td><input type="password" name="password" id="password" class="register-field" autocomplete="new-password" required></td>
                     </tr>
                     <tr>
                         <td class="register-label">
@@ -61,6 +61,13 @@
                         <td class="register-label"></td>
                         <td><input type="submit" value="Se connecter" class="register-button register-field"></td>
                     </tr>
+                    <?php if (isset($err)):?>
+                    <tr>
+                        <td colspan="2">
+                            <span><?=$err?></span>
+                        </td>
+                    </tr>
+                    <?php endif;?>
                 </table>
             </form>
         </section>
