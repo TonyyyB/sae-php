@@ -23,7 +23,7 @@
     </header>
     <main class="main-content">
         <section class="intro">
-            <h1>Voici le détail du réstaurant <?=$restau->getName()?></h1>
+            <h1>Voici le détail du restaurant <?=$restau->getName()?></h1>
         </section>
         <section class="restaurant-detail">
                 <?php
