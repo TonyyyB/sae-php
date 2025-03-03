@@ -46,11 +46,11 @@ class Avis
         $html .= "<div>";
         $html .= "<label for='note'>Note :</label>";
         $html .= "<select id='note' name='note' required>";
-        $html .= "<option value='1' class='stars-filled'>★</option>";
-        $html .= "<option value='2' class='stars-filled'>★★</option>";
-        $html .= "<option value='3' class='stars-filled'>★★★</option>";
-        $html .= "<option value='4' class='stars-filled'>★★★★</option>";
         $html .= "<option value='5' class='stars-filled'>★★★★★</option>";
+        $html .= "<option value='4' class='stars-filled'>★★★★</option>";
+        $html .= "<option value='3' class='stars-filled'>★★★</option>";
+        $html .= "<option value='2' class='stars-filled'>★★</option>";
+        $html .= "<option value='1' class='stars-filled'>★</option>";
         $html .= "</select>";
         $html .= "</div>";
         $html .= "<div>";
