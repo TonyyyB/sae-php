@@ -8,7 +8,7 @@ use Iuto\SaePhp\Model\Restaurant;
 use Iuto\SaePhp\Model\RestaurantSearch;
 class RestaurantsController extends Controller
 {
-    public function get(): void
+    public function get(string $param): void
     {
         $jp = new JsonProvider(__DIR__ . "/../../data/restaurants_orleans.json");
         $search = new RestaurantSearch($jp->loadRestaurants());
@@ -16,8 +16,8 @@ class RestaurantsController extends Controller
         $this->render('restaurants', ["restaurants" => $restaurants, "types" => $jp->getTypes(), "cuisines" => $jp->getCuisines(), "options" => $jp->getOptions(), "selected" => $_GET]);
     }
 
-    public function post(): void
+    public function post(string $param): void
     {
-        $this->get();
+        $this->get($param);
     }
 }

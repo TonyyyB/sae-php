@@ -7,7 +7,7 @@ use Iuto\SaePhp\DataSources\JsonProvider;
 use Iuto\SaePhp\Model\Restaurant;
 class HomeController extends Controller
 {
-    public function get(): void
+    public function get(string $param): void
     {
         $jp = new JsonProvider();
         $this->render('home', ["restaurants" => $jp->loadRestaurants(5)]);

@@ -5,7 +5,7 @@ use Iuto\SaePhp\DataSources\JsonProvider;
 
 class DetailController extends Controller
 {
-    public function get(): void
+    public function get(string $param): void
     {
         if(!isset($_GET["id"])){
             $this->redirectTo('/');
