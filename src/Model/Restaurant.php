@@ -200,7 +200,7 @@ class Restaurant
     public function renderCard(): string
     {
         $html = "<div class='restaurant-card'>";
-        $html .= "<a class='restaurant-card-detail' href='/detail?id=" . $this->osmId . "'><h3>";
+        $html .= "<a class='restaurant-card-detail' href='/detail/" . $this->osmId . "'><h3>";
         $html .= ucfirst($this->getName());
         $html .= "</h3><a><p>Type : ";
         $html .= ucfirst(str_replace("_", " ", $this->getType()));
@@ -236,7 +236,7 @@ class Restaurant
         return $html;
     }
 
-    public function renderDetail(): string
+    public function renderDetail(bool $isConnected = false): string
     {
         $html = "<div class='restaurant-general'><div class='restaurant-info'><h1>" . htmlspecialchars($this->getName()) . "</h1>";
         $html .= "<p>Type : " . ucfirst(str_replace("_", " ", $this->getType())) . "</p>";
@@ -310,7 +310,7 @@ class Restaurant
         } else {
             $html .= "<p>Aucun avis pour le moment.</p>";
         }
-        $html .= Avis::renderForm();
+        if($isConnected) $html .= Avis::renderForm($this->getOsmId());
         $html .= "</section>";
 
         // Carte Google Maps

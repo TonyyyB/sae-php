@@ -3,19 +3,21 @@
 namespace Iuto\SaePhp\Model;
 class Avis
 {
-    private string $utilisateur;
     private string $commentaire;
     private int $note;
-    public function __construct(string $utilisateur, string $commentaire, int $note)
+    private Restaurant $restaurant;
+    private User $user;
+    public function __construct(User $user, string $commentaire, int $note, Restaurant $restaurant)
     {
         if ($note <= 0) {
             throw new \Exception("La note doit être un entier positif.");
         } else if ($note > 5) {
             throw new \Exception("La note doit être inférieure ou égale à 5.");
         }
-        $this->utilisateur = $utilisateur;
+        $this->user = $user;
         $this->commentaire = $commentaire;
         $this->note = $note;
+        $this->restaurant = $restaurant;
     }
     public function renderStars(): string
     {
@@ -32,18 +34,18 @@ class Avis
     public function render(): string
     {
         $html = "<div class='avis'>";
-        $html .= "<p><strong>Utilisateur : </strong>" . ucfirst($this->utilisateur) . "</p>";
+        $html .= "<p><strong>Utilisateur : </strong>" . $this->user->getPrenomNom() . "</p>";
         $html .= "<p><strong>Commentaire : </strong>" . ucfirst($this->commentaire) . "</p>";
         $html .= "<p><strong>Note : </strong>" . $this->note . "/5" . $this->renderStars() . "</p>";
         $html .= "</div>";
         return $html;
     }
 
-    public static function renderForm(): string
+    public static function renderForm(int $id): string
     {
         $html = "<div class='avis'>";
         $html .= "<p>Ajouter un avis</p>";
-        $html .= "<form action='/detail' method='POST'>";
+        $html .= "<form action='/detail/".$id."' method='POST'>";
         $html .= "<div>";
         $html .= "<label for='commentaire'>Votre commentaire :</label>";
         $html .= "<textarea class='avis-textarea' id='commentaire' name='commentaire' required></textarea>";
@@ -75,14 +77,6 @@ class Avis
     {
         $this->note = $note;
     }
-    public function getUtilisateur(): string
-    {
-        return $this->utilisateur;
-    }
-    public function setUtilisateur(string $utilisateur): void
-    {
-        $this->utilisateur = $utilisateur;
-    }
     public function getCommentaire(): string
     {
         return $this->commentaire;
@@ -90,6 +84,26 @@ class Avis
     public function setCommentaire(string $commentaire): void
     {
         $this->commentaire = $commentaire;
+    }
+
+    public function getRestaurant(): Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant( Restaurant $restaurant): void
+    {
+        $this->restaurant = $restaurant;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
     }
 
 }

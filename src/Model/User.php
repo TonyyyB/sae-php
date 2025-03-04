@@ -46,6 +46,11 @@ class User
         $this->prenom = $prenom;
     }
 
+    public function getPrenomNom(): string
+    {
+        return ucfirst($this->prenom) . ' ' . ucfirst($this->nom);
+    }
+
     public function getMdp(): string
     {
         return $this->mdp;

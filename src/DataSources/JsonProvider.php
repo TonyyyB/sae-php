@@ -11,6 +11,7 @@ class JsonProvider
 {
     private string $restaurantsFilePath = "../data/restaurants_orleans.json";
     private string $usersFilePath = "../data/users.json";
+    private string $avisFilePath = "../data/avis.json";
     private array $restaurants = [];
     private array $types = [];
     private array $cuisines = [];
@@ -21,13 +22,14 @@ class JsonProvider
         "delivery" => "Livraison"
     ];
 
-    public function __construct(string $jsonFilePath = "", string $usersFilePath = "")
+    public function __construct(string $jsonFilePath = "", string $usersFilePath = "", string $avisFilePath = "")
     {
         if(!empty($jsonFilePath)) $this->restaurantsFilePath = $jsonFilePath;
         if(!empty($usersFilePath)) $this->usersFilePath = $usersFilePath;
+        if(!empty($avisFilePath)) $this->avisFilePath = $avisFilePath;
     }
 
-    public function loadRestaurants(int $nb = -1): array
+    public function loadRestaurants(int $nb = -1, bool $loadAvis = false): array
     {
         if (!file_exists($this->restaurantsFilePath)) {
             throw new \Exception("Le fichier JSON n'existe pas.");
@@ -53,14 +55,17 @@ class JsonProvider
             }
         }
 
-        $this->restaurants[0]->addAvis(new Avis("Moi", "Pas ouf", 1));
-        $this->restaurants[0]->addAvis(new Avis("Mon ami", "Super", 5));
-        $this->restaurants[0]->addAvis(new Avis("Mon ami", "Mieux", 4));
+        if ($loadAvis) {
+            foreach ($this->restaurants as $restaurant) {
+                $avis = $this->getAvis($restaurant);
+                $restaurant->setAvis($avis);
+            }
+        }
 
         return $this->restaurants;
     }
 
-    public function getById(string $id): ?Restaurant
+    public function getById(string $id, bool $loadAvis = false): ?Restaurant
     {
         if (!file_exists($this->restaurantsFilePath)) {
             throw new \Exception("Le fichier JSON n'existe pas.");
@@ -80,13 +85,54 @@ class JsonProvider
         foreach ($data as $restaurantData) {
             if (substr($restaurantData['osm_id'], 5) === $id) {
                 $restau = $this->mapToRestaurant($restaurantData);
-                //$restau->addAvis(new Avis("Moi", "Pas ouf", 1));
-                $restau->addAvis(new Avis("Mon ami", "Super", 4));
-                $restau->addAvis(new Avis("Mon ami", "Mieux", 5));
+                if ($loadAvis) {
+                    $avis = $this->getAvis($restau);
+                    $restau->setAvis($avis);
+                }
                 return $restau;
             }
         }
         return null;
+    }
+
+    public function getAvis(Restaurant $restaurant): array
+    {
+        $result = [];
+        $avis = json_decode(file_get_contents($this->avisFilePath), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
+        }
+
+        foreach($avis as $currAvis){
+            if($currAvis["idrestaurant"] == $restaurant->getOsmId()){
+                $user = new User($currAvis["user"]["email"], $currAvis["user"]["nom"], $currAvis["user"]["prenom"], "");
+                $toAdd = new Avis($user, $currAvis["commentaire"], $currAvis["note"], $restaurant);
+                $result[] = $toAdd;
+            }
+        }
+        return $result;
+    }
+
+    public function addAvis(Avis $avis): bool
+    {
+        $avisData = json_decode(file_get_contents($this->avisFilePath), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
+        }
+
+        $avisData[] = [
+            "idrestaurant" => $avis->getRestaurant()->getOsmId(),
+            "user" => [
+                "email" => $avis->getUser()->getEmail(),
+                "nom" => $avis->getUser()->getNom(),
+                "prenom" => $avis->getUser()->getPrenom()
+            ],
+            "commentaire" => $avis->getCommentaire(),
+            "note" => $avis->getNote()
+        ];
+
+        file_put_contents($this->avisFilePath, json_encode($avisData, JSON_PRETTY_PRINT));
+        return true;
     }
 
     public function addUser(User $user): bool
