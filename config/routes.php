@@ -3,11 +3,12 @@ return [
     '/' => [
         'controller' => Iuto\SaePhp\Controller\HomeController::class,
         'methods' => ['GET', 'POST'],
-        'redirect' => '/'
+        'redirect' => '/',
+        'requireArgument' => false
     ],
     '/detail' => [
         'controller' => Iuto\SaePhp\Controller\DetailController::class,
-        'methods' => ['GET'],
+        'methods' => ['GET', 'POST'],
         'redirect' => '/',
         'requiresArgument' => true
     ],

@@ -27,7 +27,7 @@
         </section>
         <section class="restaurant-detail">
                 <?php
-                    echo $restau->renderDetail();
+                    echo $restau->renderDetail(isset($_SESSION["user"]) && !empty($_SESSION["user"]));
                 ?>
         </section>
     </main>

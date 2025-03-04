@@ -10,6 +10,6 @@ class HomeController extends Controller
     public function get(string $param): void
     {
         $jp = new JsonProvider();
-        $this->render('home', ["restaurants" => $jp->loadRestaurants(5)]);
+        $this->render('home', ["restaurants" => $jp->loadRestaurants(5, true)]);
     }
 }
