@@ -5,23 +5,6 @@
     text-align: center;
 }
 
-.intro {
-    margin-bottom: 30px;
-}
-
-.top-restaurants {
-    margin-top: 30px;
-}
-
-.opening-hours-table {
-    margin: 20px 0;
-}
-
-.opening-hours-table th, .opening-hours-table td {
-    padding: 8px;
-    text-align: left;
-}
-
 .opening-hours-table {
     width: 100%;
     border-collapse: collapse;
@@ -36,7 +19,7 @@
 }
 
 .opening-hours-table-pretty .opening-hours-row-even {
-    background-color: #f2f2f2;
+    background-color: #f2f2f2; /* À refaire, il y a des problèmes lorsqu'il y a des coupures dans la journée */
 }
 
 .opening-hours-table-pretty tr:hover {
@@ -73,15 +56,6 @@
     margin: 5px 0;
 }
 
-/* Footer */
-.footer {
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
-}
-
 /* Stars */
 
 .stars-container {
@@ -89,10 +63,6 @@
     display: inline-block;
     font-size: 2rem;
     color: #ccc;
-}
-
-.stars-background {
-    display: flex;
 }
 
 .stars-filled {
@@ -103,101 +73,6 @@
     color: gold;
     overflow: hidden;
     white-space: nowrap;
-}
-
-/* Login */
-.login {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.login-table{
-    width: 100%;
-    padding: 20px;
-}
-
-.login-field{
-    padding: 10px 20px;
-    width: 85%;
-}
-
-.login-label{
-    text-align: left;
-    width: 20%;
-    padding: 10px 10px;
-    white-space: nowrap;
-}
-
-.login-button{
-    width: 150px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-/* Register */
-.register {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.register-table{
-    width: 100%;
-    padding: 20px;
-}
-
-.register-field{
-    padding: 10px 20px;
-    width: 85%;
-}
-
-.register-label{
-    text-align: left;
-    width: 20%;
-    padding: 10px 10px;
-    white-space: nowrap;
-}
-
-.register-button{
-    width: 150px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-/* Detail */
-/* Conteneur principal */
-.restaurant-detail {
-    max-width: 1200px;
-    width: 90%;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-}
-
-.restaurant-general {
-    display: contents;
-}
-
-.restaurant-info {
-    text-align: left;
-    width: 100%;
-}
-
-.restaurant-hours {
-    width: 70%;
 }
 
 /* Mise en page responsive */
@@ -224,19 +99,6 @@
     .map-container {
         grid-column: span 1;
     }
-}
-
-/* Titres */
-.restaurant-detail h1, .restaurant-detail h2 {
-    color: #4CAF50;
-    margin-bottom: 10px;
-}
-
-/* Paragraphe */
-.restaurant-detail p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #555;
 }
 
 /* Options */
@@ -266,39 +128,11 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Google Maps */
-.map-container {
-    margin-top: 20px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 300px;
-    border: none;
-}
-
-/* Formulaire avis */
-.avis-textarea{
-    width: 90%;
-}
-
-/* Formulaire pour ajouter un avis */
+/* Formulaire trier les restaurants */
 form div {
     margin-bottom: 15px;
 }
 
-form input, form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.container.active {
-    display: block;
-}
 .dropdown {
     position: relative;
     width: 100%;
@@ -316,14 +150,10 @@ form input, form textarea {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.dropdown-button:hover {
-    background-color: #f9f9f9;
-}
-
 .dropdown-button:after {
     content: "▼";
-    font-size: 12px;
-    color: #333;
+    /* font-size: 12px; */
+    /* color: #333; */
 }
 
 .checkbox-list {
@@ -350,22 +180,15 @@ form input, form textarea {
     max-height: 300px;
 }
 
-/* Style des éléments de la grille */
-.checkbox-item {
-    display: flex;
-    align-items: center;
-    white-space: nowrap; /* Empêche le texte de passer à la ligne */
-}
-
 .checkbox-list li {
     padding: 10px 16px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0; /* A changer, c'est pas naturel */
 }
 
 .checkbox-list li:last-child {
-    border-bottom: none;
+    border-bottom: none; /* À refaire, ne fonctionne pas comme c'est prévu */
 }
 
 .checkbox-list input[type="checkbox"] {
@@ -377,8 +200,6 @@ form input, form textarea {
 }
 
 .checkbox-list label {
-    font-size: 14px;
-    color: #333;
     cursor: pointer;
-    flex-grow: 1;
+    /* flex-grow: 1; */ /* Pas forcément nécessaire */
 }
