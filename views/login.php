@@ -12,37 +12,37 @@
 </head>
 
 <body>
-<?php require_once "static/header.php";?>
+    <?php require_once "static/header.php"; ?>
     <main class="main-content">
         <section class="login">
-            <h2>Merci de vous connecter:</h2>
+            <h2 class="login-title">Merci de vous connecter:</h2>
             <form action="/login" method="post">
                 <table class="login-table">
-                    <tr>
+                    <tr class="login-row">
                         <td class="login-label">Email:</td>
-                        <td><input type="email" name="email" class="login-field" required></td>
+                        <td><input type="email" name="email" class="login-field login-input" required></td>
                     </tr>
-                    <tr>
+                    <tr class="login-row">
                         <td class="login-label">Mot de passe:</td>
-                        <td><input type="password" name="password" class="login-field" required></td>
+                        <td><input type="password" name="password" class="login-field login-input" required></td>
                     </tr>
-                    <tr>
+                    <tr class="login-row">
                         <td class="login-label"></td>
-                        <td><input type="submit" value="Se connecter" class="login-button login-field"></td>
+                        <td><input type="submit" value="Se connecter" class="button login-button login-field"></td>
                     </tr>
-                    <?php if (isset($err)):?>
-                    <tr>
-                        <td colspan="2">
-                            <span><?=$err?></span>
-                        </td>
-                    </tr>
-                    <?php endif;?>
+                    <?php if (isset($err)): ?>
+                        <tr class="login-row">
+                            <td colspan="2">
+                                <span><?= $err ?></span>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                 </table>
                 </table>
             </form>
         </section>
     </main>
-    <?php require_once "static/footer.php";?>
+    <?php require_once "static/footer.php"; ?>
 </body>
 
 </html>

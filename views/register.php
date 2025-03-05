@@ -12,61 +12,63 @@
 </head>
 
 <body>
-<?php require_once "static/header.php";?>
+    <?php require_once "static/header.php"; ?>
     <main class="main-content">
-        <section class="register">
-            <h2>Merci de vous inscrire:</h2>
+        <section class="login">
+            <h2 class="login-title">Merci de vous inscrire:</h2>
             <form action="/register" method="post">
-                <table class="register-table">
-                    <tr>
-                        <td class="register-label">
-                            <p>Email:</p>
+                <table class="login-table">
+                    <tr class="login-row">
+                        <td class="login-label">
+                            Email:
                         </td>
-                        <td><input type="email" name="email" class="register-field" required></td>
+                        <td><input type="email" name="email" class="login-field login-input" required></td>
                     </tr>
-                    <tr>
-                        <td class="register-label">
-                            <p>Nom:</p>
+                    <tr class="login-row">
+                        <td class="login-label">
+                            Nom:
                         </td>
-                        <td><input type="text" name="nom" class="register-field" required></td>
+                        <td><input type="text" name="nom" class="login-field login-input" required></td>
                     </tr>
-                    <tr>
-                        <td class="register-label">
-                            <p>Prenom:</p>
+                    <tr class="login-row">
+                        <td class="login-label">
+                            Prenom:
                         </td>
-                        <td><input type="text" name="prenom" class="register-field" required></td>
+                        <td><input type="text" name="prenom" class="login-field login-input" required></td>
                     </tr>
-                    <tr>
-                        <td class="register-label">
-                            <p>Mot de passe:</p>
+                    <tr class="login-row">
+                        <td class="login-label">
+                            Mot de passe:
                         </td>
-                        <td><input type="password" name="password" id="password" class="register-field" autocomplete="new-password" required></td>
-                    </tr>
-                    <tr>
-                        <td class="register-label">
-                            <p>Confirmer mot de passe:</p>
+                        <td><input type="password" name="password" id="password" class="login-field login-input"
+                                autocomplete="new-password" required></td>
+                    </tr class="login-row">
+                    <tr class="login-row">
+                        <td class="login-label">
+                            Confirmer mot de passe:
                             <span id='message'></span>
                         </td>
-                        <td><input type="password" name="confirm_password" id="confirm_password" class="register-field" onkeyup='check();' required></td>
+                        <td><input type="password" name="confirm_password" id="confirm_password"
+                                class="login-field login-input" onkeyup='check();' required></td>
                     </tr>
-                    <tr>
-                        <td class="register-label"></td>
-                        <td><input type="submit" value="Se connecter" class="register-button register-field"></td>
+                    <tr class="login-row">
+                        <td class="login-label"></td>
+                        <td><input type="submit" value="Se connecter" class="button login-button login-field"></td>
                     </tr>
-                    <?php if (isset($err)):?>
-                    <tr>
-                        <td colspan="2">
-                            <span><?=$err?></span>
-                        </td>
-                    </tr>
-                    <?php endif;?>
+                    <?php if (isset($err)): ?>
+                        <tr>
+                            <td colspan="2">
+                                <span><?= $err ?></span>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                 </table>
             </form>
         </section>
     </main>
-    <?php require_once "static/footer.php";?>
+    <?php require_once "static/footer.php"; ?>
     <script>
-        var check = function() {
+        var check = function () {
             if (document.getElementById('password').value ==
                 document.getElementById('confirm_password').value) {
                 document.getElementById('message').style.color = 'green';
