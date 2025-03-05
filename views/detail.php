@@ -14,9 +14,6 @@
 <body>
 <?php require_once "static/header.php";?>
     <main class="main-content">
-        <section class="intro">
-            <h1>Voici le détail du restaurant <?=$restau->getName()?></h1>
-        </section>
         <section class="restaurant-detail">
                 <?php
                     echo $restau->renderDetail(isset($_SESSION["user"]) && !empty($_SESSION["user"]));
