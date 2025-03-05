@@ -10,45 +10,6 @@ body {
     color: #333;
 }
 
-/* Header */
-.header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px;
-    text-align: center;
-}
-
-.header-title {
-    margin: 0;
-    font-size: 2em;
-}
-
-.nav {
-    margin-top: 10px;
-}
-
-.nav-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.nav-list li {
-    display: inline;
-}
-
-.nav-list a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.nav-list a:hover {
-    text-decoration: underline;
-}
-
 /* Main content */
 .main-content {
     padding: 20px;
@@ -132,7 +93,7 @@ body {
 
 .restaurant-card h3 {
     margin-top: 0;
-    color: #4CAF50;
+    color: #805050;
 }
 
 .restaurant-card p {
@@ -271,7 +232,7 @@ body {
 /* Titres */
 .restaurant-detail h1,
 .restaurant-detail h2 {
-    color: #4CAF50;
+    color: #805050;
     margin-bottom: 10px;
 }
 
@@ -421,7 +382,7 @@ form textarea {
     width: 16px;
     height: 16px;
     cursor: pointer;
-    accent-color: #4caf50;
+    accent-color: #805050;
 }
 
 .checkbox-list label {
