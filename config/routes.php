@@ -4,7 +4,7 @@ return [
         'controller' => Iuto\SaePhp\Controller\HomeController::class,
         'methods' => ['GET', 'POST'],
         'redirect' => '/',
-        'requireArgument' => false
+        'requiresArgument' => false
     ],
     '/detail' => [
         'controller' => Iuto\SaePhp\Controller\DetailController::class,
@@ -26,6 +26,12 @@ return [
     ],
     '/register' => [
         'controller' => Iuto\SaePhp\Controller\RegisterController::class,
+        'methods' => ['GET', 'POST'],
+        'redirect' => '/',
+        'requiresArgument' => false
+    ],
+    '/logout' => [
+        'controller' => Iuto\SaePhp\Controller\LogoutController::class,
         'methods' => ['GET', 'POST'],
         'redirect' => '/',
         'requiresArgument' => false
