@@ -200,3 +200,19 @@ form div {
     background-color: #4CAF50;
     color:white;
 }
+
+form button{
+    transition: transform 0.1s ease, background-color 0.3s ease;
+    cursor: pointer;
+    padding: 1em 1.5em;
+    border: none;
+    border-radius: 15px;
+    margin: 0 0.5em;
+    background-color: #4CAF50;
+    color:white;
+    font-weight: bold;
+}
+
+form button:active {
+    transform: scale(0.9);
+}
