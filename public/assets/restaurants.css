@@ -1,0 +1,218 @@
+/* Main content */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+.opening-hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.opening-hours-table-pretty td {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+.opening-hours-table-pretty .opening-hours-row-even {
+    background-color: #f2f2f2; /* À refaire, il y a des problèmes lorsqu'il y a des coupures dans la journée */
+}
+
+.opening-hours-table-pretty tr:hover {
+    background-color: #ddd;
+}
+
+.restaurant-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.restaurant-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.restaurant-card-detail {
+    text-decoration: none;
+}
+
+.restaurant-card h3 {
+    margin-top: 0;
+    color: #4CAF50;
+}
+
+.restaurant-card p {
+    margin: 5px 0;
+}
+
+/* Stars */
+
+.stars-container {
+    position: relative;
+    display: inline-block;
+    font-size: 2rem;
+    color: #ccc;
+}
+
+.stars-filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    color: gold;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Mise en page responsive */
+@media (min-width: 768px) {
+    .restaurant-general {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    .restaurant-info {
+        grid-column: span 1;
+    }
+    
+    .map-container {
+        grid-column: span 2;
+    }
+}
+
+@media (min-width: 1024px) {
+    .restaurant-general {
+        grid-template-columns: 2fr 1fr;
+    }
+    .map-container {
+        grid-column: span 1;
+    }
+}
+
+/* Options */
+.options-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.options-list li {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Section avis */
+.avis-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.avis-section .avis {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulaire trier les restaurants */
+form div {
+    margin-bottom: 1em;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 1.5em;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-button:after {
+    content: "▼";
+}
+
+.checkbox-list {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.checkbox-list.active {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: auto;
+    max-height: 30em;
+}
+
+.checkbox-list li {
+    /* Taille minimum pour garantir l'ergonomie */
+    min-width: 12em;
+    min-height: 3.5em;
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.checkbox-list label {
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-list input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-list li > label:has(input[type="checkbox"]:checked) {
+    /* À changer la couleur pour correspondre avec la DA du site */
+    background-color: #4CAF50;
+    color:white;
+}
+
+form button{
+    transition: transform 0.1s ease, background-color 0.3s ease;
+    cursor: pointer;
+    padding: 1em 1.5em;
+    border: none;
+    border-radius: 15px;
+    margin: 0 0.5em;
+    background-color: #4CAF50;
+    color:white;
+    font-weight: bold;
+}
+
+form button:active {
+    transform: scale(0.9);
+}
