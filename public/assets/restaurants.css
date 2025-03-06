@@ -49,7 +49,7 @@
 
 .restaurant-card h3 {
     margin-top: 0;
-    color: #4CAF50;
+    color: #ddccb2;
 }
 
 .restaurant-card p {
@@ -197,8 +197,8 @@ form div {
 
 .checkbox-list li > label:has(input[type="checkbox"]:checked) {
     /* À changer la couleur pour correspondre avec la DA du site */
-    background-color: #4CAF50;
-    color:white;
+    background-color: #ddccb2;
+    color: #805050;
 }
 
 form button{
@@ -208,8 +208,8 @@ form button{
     border: none;
     border-radius: 15px;
     margin: 0 0.5em;
-    background-color: #4CAF50;
-    color:white;
+    background-color: #ddccb2;
+    color: #805050;
     font-weight: bold;
 }
 
