@@ -123,7 +123,7 @@ class JsonProvider
         foreach($avis as $currAvis){
             if($currAvis["user"]["email"] == $userRecherche->getEmail()){
                 $user = $userRecherche;
-                $toAddAvis = new Avis($user, $currAvis["commentaire"], $currAvis["note"], $currAvis["idrestaurant"]);
+                $toAddAvis = new Avis($user, $currAvis["commentaire"], $currAvis["note"], $this->getById($currAvis["idrestaurant"]));
                 $result[] = $toAddAvis;
             }
         }

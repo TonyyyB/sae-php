@@ -99,7 +99,7 @@ class User
         );
     }
 
-    public function renderDetail(bool $isConnected = false): string
+    public function renderDetail(): string
     {
         $html = "<div class='user-general'><div class='user-info'><h1>" . htmlspecialchars($this->getNom()) . "</h1>";
 

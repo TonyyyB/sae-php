@@ -8,24 +8,19 @@ class DetailUserController extends Controller
 {
     public function get(string $param): void
     {
-        if(empty($param)){
-            $this->redirectTo('/');
+        if(!isset($_SESSION["user"]) || empty($_SESSION["user"])){
+            $this->redirectTo("/");
         }
         $jp = new JsonProvider();
-        $avis = $jp->getAvisByUser($param);
-        if(!$avis){
-            $this->redirectTo('/');
-        }
-        $this->render('detailUser', ['avis' => $avis]);
+        $avis = $jp->getAvisByUser($_SESSION["user"]);
+        $_SESSION["user"]->setAvis($avis);
+        $this->render('detailUser', ['user' => $_SESSION["user"]]);
     }
 
     public function post(string $param): void
     {
         if(!isset($_SESSION["user"]) || empty($_SESSION["user"])){
-            $this->redirectTo("/detailUser/".$param);
-        }
-        if(empty($param)){
-            $this->redirectTo('/');
+            $this->redirectTo("/");
         }
         $jp = new JsonProvider();
         $restau = $jp->getById($param);
