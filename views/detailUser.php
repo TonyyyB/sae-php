@@ -16,7 +16,7 @@
     <main class="main-content">
         <section class="user-detail">
                 <?php
-                    echo $user->render(isset($_SESSION["user"]) && !empty($_SESSION["user"]));
+                    echo $user->renderDetail(isset($_SESSION["user"]) && !empty($_SESSION["user"]));
                 ?>
         </section>
     </main>

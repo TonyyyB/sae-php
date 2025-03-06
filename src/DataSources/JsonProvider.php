@@ -3,7 +3,6 @@
 namespace Iuto\SaePhp\DataSources;
 
 use Iuto\SaePhp\Model\Restaurant;
-use Iuto\SaePhp\Model\Cuisine;
 use Iuto\SaePhp\Model\Avis;
 use Iuto\SaePhp\Model\User;
 
@@ -123,9 +122,9 @@ class JsonProvider
 
         foreach($avis as $currAvis){
             if($currAvis["user"]["email"] == $userRecherche->getEmail()){
-                $user = $$userRecherche
-                $toAdd = new Avis($user, $currAvis["commentaire"], $currAvis["note"], $userRecherche);
-                $result[] = $toAdd;
+                $user = $userRecherche;
+                $toAddAvis = new Avis($user, $currAvis["commentaire"], $currAvis["note"], $currAvis["idrestaurant"]);
+                $result[] = $toAddAvis;
             }
         }
         return $result;
