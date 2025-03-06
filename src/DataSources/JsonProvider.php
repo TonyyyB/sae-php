@@ -3,7 +3,6 @@
 namespace Iuto\SaePhp\DataSources;
 
 use Iuto\SaePhp\Model\Restaurant;
-use Iuto\SaePhp\Model\Cuisine;
 use Iuto\SaePhp\Model\Avis;
 use Iuto\SaePhp\Model\User;
 
@@ -108,6 +107,24 @@ class JsonProvider
                 $user = new User($currAvis["user"]["email"], $currAvis["user"]["nom"], $currAvis["user"]["prenom"], "");
                 $toAdd = new Avis($user, $currAvis["commentaire"], $currAvis["note"], $restaurant);
                 $result[] = $toAdd;
+            }
+        }
+        return $result;
+    }
+
+    public function getAvisByUser(User $userRecherche): array
+    {
+        $result = [];
+        $avis = json_decode(file_get_contents($this->avisFilePath), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
+        }
+
+        foreach($avis as $currAvis){
+            if($currAvis["user"]["email"] == $userRecherche->getEmail()){
+                $user = $userRecherche;
+                $toAddAvis = new Avis($user, $currAvis["commentaire"], $currAvis["note"], $this->getById($currAvis["idrestaurant"]));
+                $result[] = $toAddAvis;
             }
         }
         return $result;

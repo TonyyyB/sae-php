@@ -35,5 +35,11 @@ return [
         'methods' => ['GET', 'POST'],
         'redirect' => '/',
         'requiresArgument' => false
+    ],
+    '/detailUser' => [
+        'controller' => Iuto\SaePhp\Controller\DetailUserController::class,
+        'methods' => ['GET', 'POST'],
+        'redirect' => '/',
+        'requiresArgument' => false
     ]
 ];

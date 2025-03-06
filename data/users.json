@@ -4,5 +4,11 @@
         "nom": "Beaujouan",
         "prenom": "Tony",
         "mdp": "967520ae23e8ee14888bae72809031b98398ae4a636773e18fff917d77679334"
+    },
+    {
+        "email": "toto@gmail.com",
+        "nom": "toto",
+        "prenom": "toto",
+        "mdp": "31f7a65e315586ac198bd798b6629ce4903d0899476d5741a9f32e2e521b6a66"
     }
 ]
