@@ -152,8 +152,6 @@ form div {
 
 .dropdown-button:after {
     content: "▼";
-    /* font-size: 12px; */
-    /* color: #333; */
 }
 
 .checkbox-list {
@@ -174,32 +172,49 @@ form div {
 
 .checkbox-list.active {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colonnes flexibles */
+    /* Peut-être à refaire, c'est pas exceptionnel */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 10px;
     overflow-y: auto;
     max-height: 300px;
 }
 
 .checkbox-list li {
-    padding: 10px 16px;
+    width: 10em;
+    height: 3em;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #e0e0e0; /* A changer, c'est pas naturel */
+    /* A changer, c'est pas naturel */
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .checkbox-list li:last-child {
-    border-bottom: none; /* À refaire, ne fonctionne pas comme c'est prévu */
-}
-
-.checkbox-list input[type="checkbox"] {
-    margin-right: 10px;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    accent-color: #4caf50;
+    /* À refaire, ne fonctionne pas comme c'est prévu */
+    border-bottom: none;
 }
 
 .checkbox-list label {
     cursor: pointer;
-    /* flex-grow: 1; */ /* Pas forcément nécessaire */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    /* Temporaire, c'est pour voir les hitbox */
+    /* background-color: rgb(238, 238, 238); */
+}
+
+.checkbox-list input[type="checkbox"] {
+    /* margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #4caf50; */
+    display: none;
+}
+
+.checkbox-list li > label:has(input[type="checkbox"]:checked) {
+    /* À changer la couleur pour correspondre avec la DA du site */
+    background-color: #4CAF50;
 }
