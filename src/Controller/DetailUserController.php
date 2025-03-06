@@ -4,28 +4,23 @@ namespace Iuto\SaePhp\Controller;
 use Iuto\SaePhp\DataSources\JsonProvider;
 use Iuto\SaePhp\Model\Avis;
 
-class DetailController extends Controller
+class DetailUserController extends Controller
 {
     public function get(string $param): void
     {
-        if(empty($param)){
-            $this->redirectTo('/');
+        if(!isset($_SESSION["user"]) || empty($_SESSION["user"])){
+            $this->redirectTo("/");
         }
         $jp = new JsonProvider();
-        $restau = $jp->getById($param, true);
-        if(!$restau){
-            $this->redirectTo('/');
-        }
-        $this->render('detail', ['restau' => $restau]);
+        $avis = $jp->getAvisByUser($_SESSION["user"]);
+        $_SESSION["user"]->setAvis($avis);
+        $this->render('detailUser', ['user' => $_SESSION["user"]]);
     }
 
     public function post(string $param): void
     {
         if(!isset($_SESSION["user"]) || empty($_SESSION["user"])){
-            $this->redirectTo("/detail/".$param);
-        }
-        if(empty($param)){
-            $this->redirectTo('/');
+            $this->redirectTo("/");
         }
         $jp = new JsonProvider();
         $restau = $jp->getById($param);
@@ -34,8 +29,8 @@ class DetailController extends Controller
         }
         $avis = new Avis($_SESSION["user"], $_POST['commentaire'], (int)$_POST['note'], $restau);
         $jp->addAvis($avis);
-        $tousAvis = $jp->getAvis($restau);
-        $restau->setAvis($tousAvis);
-        $this->render('detail', ['restau' => $restau]);
+        $tousAvis = $jp->getAvisByUser($_SESSION["user"]);
+        $_SESSION["user"]->setAvis($tousAvis);
+        $this->render('detailUser', ['avis' => $avis]);
     }
 }

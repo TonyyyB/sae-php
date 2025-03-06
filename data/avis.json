@@ -1,0 +1,32 @@
+[
+    {
+        "idrestaurant": "3422189698",
+        "user": {
+            "email": "tony.beaujouan@etu.univ-orleans.fr",
+            "nom": "Beaujouan",
+            "prenom": "Tony"
+        },
+        "commentaire": "Pas mal !",
+        "note": 4
+    },
+    {
+        "idrestaurant": "3422189698",
+        "user": {
+            "email": "tony.beaujouan@etu.univ-orleans.fr",
+            "nom": "Beaujouan",
+            "prenom": "Tony"
+        },
+        "commentaire": "Nul nul nuk",
+        "note": 1
+    },
+    {
+        "idrestaurant": "9136326362",
+        "user": {
+            "email": "toto@gmail.com",
+            "nom": "toto",
+            "prenom": "toto"
+        },
+        "commentaire": "koskjfeoesjfiesojf",
+        "note": 5
+    }
+]

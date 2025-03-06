@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?=$restau->getName()?> - IUTables'O</title>
+    <title><?=$user->getPrenomNom()?> - IUTables'O</title>
     <link rel="stylesheet" href="/assets/styles.css">
     <link rel="stylesheet" href="/assets/header.css">
     <link rel="stylesheet" href="/assets/footer.css">
@@ -14,9 +14,9 @@
 <body>
 <?php require_once "static/header.php";?>
     <main class="main-content">
-        <section class="restaurant-detail">
+        <section class="user-detail">
                 <?php
-                    echo $restau->renderDetail(isset($_SESSION["user"]) && !empty($_SESSION["user"]));
+                    echo $user->renderDetail();
                 ?>
         </section>
     </main>
