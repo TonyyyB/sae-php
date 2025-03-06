@@ -19,11 +19,7 @@
 }
 
 .opening-hours-table-pretty .opening-hours-row-even {
-    background-color: #f2f2f2; /* À refaire, il y a des problèmes lorsqu'il y a des coupures dans la journée */
-}
-
-.opening-hours-table-pretty tr:hover {
-    background-color: #ddd;
+    background-color: #fadecc;
 }
 
 .restaurant-list {
@@ -34,7 +30,7 @@
 }
 
 .restaurant-card {
-    background-color: white;
+    background-color: #fae9de;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 15px;
@@ -49,7 +45,7 @@
 
 .restaurant-card h3 {
     margin-top: 0;
-    color: #ddccb2;
+    color: #805050;
 }
 
 .restaurant-card p {
@@ -107,6 +103,7 @@
     flex-wrap: wrap;
     gap: 10px;
 }
+
 .options-list li {
     background-color: #f0f0f0;
     padding: 5px 10px;
@@ -149,6 +146,10 @@ form div {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.dropdown-button:hover {
+    background-color: #f9f9f9;
+}
+
 .dropdown-button:after {
     content: "▼";
 }
@@ -169,11 +170,10 @@ form div {
     flex-wrap: wrap;
     justify-content: space-between;
     overflow-y: auto;
-    max-height: 30em;
+    max-height: 15em;
 }
 
 .checkbox-list li {
-    /* Taille minimum pour garantir l'ergonomie */
     min-width: 12em;
     min-height: 3.5em;
     display: flex;
@@ -195,7 +195,7 @@ form div {
     display: none;
 }
 
-.checkbox-list li > label:has(input[type="checkbox"]:checked) {
+.checkbox-list li:has(input[type="checkbox"]:checked) {
     /* À changer la couleur pour correspondre avec la DA du site */
     background-color: #ddccb2;
     color: #805050;

@@ -29,6 +29,7 @@
                     <div class="dropdown">
                         <div class="dropdown-button">Type de restaurant</div>
                         <div class="checkbox-list">
+                        <!-- <span> ★ </span> -->
                             <?php
                                 foreach($types as $type){
                                     echo "<li class='checkbox-item'><label><input type='checkbox' name='type[]' value='{$type}' ".(isset($selected["type"]) ? (in_array($type, $selected["type"]) ? "checked" : "") : "").">".htmlspecialchars(str_replace("_"," ",ucfirst($type)))."</label></li>";
