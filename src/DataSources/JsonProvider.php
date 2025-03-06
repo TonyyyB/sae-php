@@ -113,6 +113,24 @@ class JsonProvider
         return $result;
     }
 
+    public function getAvisByUser(User $userRecherche): array
+    {
+        $result = [];
+        $avis = json_decode(file_get_contents($this->avisFilePath), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
+        }
+
+        foreach($avis as $currAvis){
+            if($currAvis["user"]["email"] == $userRecherche->getEmail()){
+                $user = $$userRecherche
+                $toAdd = new Avis($user, $currAvis["commentaire"], $currAvis["note"], $userRecherche);
+                $result[] = $toAdd;
+            }
+        }
+        return $result;
+    }
+
     public function addAvis(Avis $avis): bool
     {
         $avisData = json_decode(file_get_contents($this->avisFilePath), true);
