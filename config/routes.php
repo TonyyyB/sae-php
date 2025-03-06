@@ -35,5 +35,11 @@ return [
         'methods' => ['GET', 'POST'],
         'redirect' => '/',
         'requiresArgument' => false
+    ],
+    '/detailUser' => [
+        'controller' => Iuto\SaePhp\Controller\LogoutController::class,
+        'methods' => ['GET', 'POST'],
+        'redirect' => '/',
+        'requiresArgument' => false
     ]
 ];

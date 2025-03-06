@@ -7,7 +7,7 @@
     </div>
     <?php if (isset($_SESSION['user']) && !empty($_SESSION["user"])): ?>
         <div class="user">
-            <h1 class="username"><?= $_SESSION["user"]->getPrenomNom() ?></h1>
+            <h1 class="username"><a href=""><?= $_SESSION["user"]->getPrenomNom() ?></a></h1>
             <a href="/logout" class="button">Déconnexion</a>
         </div>
     <?php else: ?>

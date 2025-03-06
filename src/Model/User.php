@@ -8,12 +8,30 @@ class User
     private string $prenom;
     private string $mdp;
 
+    private ?array $avis;
+
     public function __construct(string $email, string $nom, string $prenom, string $mdp)
     {
         $this->email = $email;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->mdp = $mdp;
+        $this->avis = [];
+    }
+
+    public function setAvis(array $avis): void
+    {
+        $this->avis = $avis;
+    }
+
+    public function getAvis(): ?array
+    {
+        return $this->avis;
+    }
+
+    public function addAvis(Avis $avis): void
+    {
+        $this->avis[] = $avis;
     }
 
     public function getEmail(): string
@@ -79,5 +97,22 @@ class User
             $data['prenom'],
             $data['mdp']
         );
+    }
+
+    public function renderDetail(bool $isConnected = false): string
+    {
+        $html = "<div class='user-general'><div class='user-info'><h1>" . htmlspecialchars($this->getNom()) . "</h1>";
+
+        // Avis
+        $html .= "<section class='avis-section'>";
+        if (isset($this->avis) && sizeof($this->avis) > 0) {
+            $html .= "<h3>Avis de l'utilisateur</h3>";
+            foreach ($this->avis as $avis) {
+                $html .= $avis->render();
+            }
+        } else {
+            $html .= "<p>Aucun avis pour le moment.</p>";
+        }
+        return $html;
     }
 }
