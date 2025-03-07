@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - IUTables'O</title>
-    <link rel="stylesheet" href="/assets/global.css">
+    <title>Restaurants - IUTables'O</title>
     <link rel="stylesheet" href="/assets/restaurants.css">
+    <link rel="stylesheet" href="/assets/global.css">
+    <link rel="stylesheet" href="/assets/header.css">
+    <link rel="stylesheet" href="/assets/footer.css">
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
     <script src="/assets/script.js"></script>
 </head>
