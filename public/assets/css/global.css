@@ -1,3 +1,5 @@
+/* CSS Présent sur toutes les pages du site */
+
 /* Style global */
 body {
     display: flex;
@@ -80,3 +82,7 @@ body {
     font-weight: bold;
 }
 
+/* Main content */
+.main-content {
+    padding: 20px;
+}

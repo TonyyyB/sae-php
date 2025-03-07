@@ -1,0 +1,47 @@
+/* Section avis */
+.avis-section {
+    margin-top: 30px;
+    padding-top: 20px;
+}
+
+.avis {
+    background-color: #f1c8ae;
+    border-radius: 8px;
+    margin: 15px 0;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulaire avis */
+.avis-textarea {
+    margin: 1em 0;
+    width: 100%;
+    height: 5em;
+    border: none;
+}
+
+.avis select{
+    color: #805050;
+    margin: 1em;
+}
+
+.avis select, .avis button{
+    padding: 0.5em;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Stars */
+.stars-container {
+    position: relative;
+    font-size: 2rem;
+    color: #e5c6b5;
+}
+
+.stars-filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #805050;
+    overflow: hidden;
+}

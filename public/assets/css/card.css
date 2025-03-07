@@ -10,6 +10,7 @@
 }
 
 .opening-hours-table {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
@@ -29,7 +30,7 @@
 .restaurant-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 50px;
     justify-content: center;
 }
 
@@ -56,29 +57,18 @@
     margin: 5px 0;
 }
 
-/* Stars */
 
+/* Stars */
 .stars-container {
     position: relative;
-    display: inline-block;
     font-size: 2rem;
     color: #e5c6b5;
-}
-
-.avis .stars-container{
-    color: #d9a98c;
-}
-
-.stars-background {
-    display: flex;
 }
 
 .stars-filled {
     position: absolute;
     top: 0;
     left: 0;
-    display: flex;
     color: #805050;
     overflow: hidden;
-    white-space: nowrap;
 }

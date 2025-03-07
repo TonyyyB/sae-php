@@ -1,63 +1,8 @@
 /* Main content */
 .main-content {
-    flex-grow: 1;
-    padding: 20px;
+    /* Utile ? */
     text-align: center;
 }
-
-/* Mise en page responsive */
-@media (min-width: 768px) {
-    .restaurant-general {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-    
-    .restaurant-info {
-        grid-column: span 1;
-    }
-    
-    .map-container {
-        grid-column: span 2;
-    }
-}
-
-@media (min-width: 1024px) {
-    .restaurant-general {
-        grid-template-columns: 2fr 1fr;
-    }
-    .map-container {
-        grid-column: span 1;
-    }
-}
-
-/* Options */
-.options-list ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.options-list li {
-    background-color: #f0f0f0;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-/* Section avis */
-/* .avis-section {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #ddd;
-}
-
-.avis-section .avis {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-} */
 
 /* Formulaire trier les restaurants */
 form div {
@@ -130,7 +75,6 @@ form div {
 }
 
 .checkbox-list li:has(input[type="checkbox"]:checked) {
-    /* À changer la couleur pour correspondre avec la DA du site */
     background-color: #ddccb2;
     color: #805050;
 }

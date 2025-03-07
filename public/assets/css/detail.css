@@ -1,0 +1,42 @@
+/* Detail */
+/* Conteneur principal */
+.restaurant-detail {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #ffe8da;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.restaurant-general{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+@media (max-width: 768px){
+    .restaurant-general{
+        flex-direction: column;
+    }
+}
+
+/* Titres */
+main h1, main h2 {
+    color: #805050;
+}
+
+/* Paragraphe */
+.restaurant-detail p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Google Maps */
+.map-container {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
