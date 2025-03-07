@@ -212,15 +212,18 @@ class JsonProvider
         {
             throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
         }
+        $modified = false;
         foreach($avisData as $i => $currAvis){
             if($currAvis["id"] == $avis->getId()){
                 unset($avisData[$i]);
-                file_put_contents($this->avisFilePath, json_encode($avisData, JSON_PRETTY_PRINT));
-                return true;
+                $modified = true;
             }
         }
-
-        return false;
+        if($modified){
+            $avisData = array_values($avisData);
+            file_put_contents($this->avisFilePath, json_encode($avisData, JSON_PRETTY_PRINT));
+        }
+        return $modified;
     }
 
     public function addUser(User $user): bool

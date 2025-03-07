@@ -1,5 +1,5 @@
-{
-    "0": {
+[
+    {
         "id": 0,
         "idrestaurant": "3422189698",
         "user": {
@@ -7,10 +7,10 @@
             "nom": "Beaujouan",
             "prenom": "Tony"
         },
-        "commentaire": "Pas mal !",
+        "commentaire": "Pas mal !!!!!",
         "note": 5
     },
-    "2": {
+    {
         "id": 2,
         "idrestaurant": "9136326362",
         "user": {
@@ -21,4 +21,4 @@
         "commentaire": "koskjfeoesjfiesojf",
         "note": 5
     }
-}
+]
