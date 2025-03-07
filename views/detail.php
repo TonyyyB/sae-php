@@ -13,14 +13,14 @@
 
 <body>
 <?php require_once "static/header.php";?>
-    <main class="main-content">
-        <section class="restaurant-detail">
-                <?php
-                    echo $restau->renderDetail(isset($_SESSION["user"]) && !empty($_SESSION["user"]));
-                ?>
-        </section>
-    </main>
-    <?php require_once "static/footer.php";?>
+<main class="main-content">
+    <section class="restaurant-detail">
+            <?php
+                echo $restau->renderDetail(isset($_SESSION["user"]) && !empty($_SESSION["user"]));
+            ?>
+    </section>
+</main>
+<?php require_once "static/footer.php";?>
 </body>
 
 </html>
