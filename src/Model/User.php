@@ -108,7 +108,7 @@ class User
         if (isset($this->avis) && sizeof($this->avis) > 0) {
             $html .= "<h3>Avis de l'utilisateur</h3>";
             foreach ($this->avis as $avis) {
-                $html .= $avis->render();
+                $html .= $avis->renderGestion();
             }
         } else {
             $html .= "<p>Aucun avis pour le moment.</p>";

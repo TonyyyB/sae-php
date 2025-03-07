@@ -183,6 +183,46 @@ class JsonProvider
         return true;
     }
 
+    public function editAvis(Avis $avis): bool
+    {
+        $avisData = json_decode(file_get_contents($this->avisFilePath), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
+        }
+
+        $modified = false;
+
+        foreach($avisData as $i => $currAvis){
+            if($currAvis["id"] == $avis->getId()){
+                $avisData[$i]["commentaire"] = $avis->getCommentaire();
+                $avisData[$i]["note"] = $avis->getNote();
+                $modified = true;
+                break;
+            }
+        }
+
+        file_put_contents($this->avisFilePath, json_encode($avisData, JSON_PRETTY_PRINT));
+        return $modified;
+    }
+
+    public function deleteAvis(Avis $avis): bool
+    {
+        $avisData = json_decode(file_get_contents($this->avisFilePath), true);
+        if (json_last_error() !== JSON_ERROR_NONE)
+        {
+            throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
+        }
+        foreach($avisData as $i => $currAvis){
+            if($currAvis["id"] == $avis->getId()){
+                unset($avisData[$i]);
+                file_put_contents($this->avisFilePath, json_encode($avisData, JSON_PRETTY_PRINT));
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function addUser(User $user): bool
     {
         $users = json_decode(file_get_contents($this->usersFilePath), true);
