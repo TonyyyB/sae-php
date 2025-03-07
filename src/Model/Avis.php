@@ -3,17 +3,19 @@
 namespace Iuto\SaePhp\Model;
 class Avis
 {
+    private int $id;
     private string $commentaire;
     private int $note;
     private Restaurant $restaurant;
     private User $user;
-    public function __construct(User $user, string $commentaire, int $note, Restaurant $restaurant)
+    public function __construct(int $id, User $user, string $commentaire, int $note, Restaurant $restaurant)
     {
         if ($note <= 0) {
             throw new \Exception("La note doit être un entier positif.");
         } else if ($note > 5) {
             throw new \Exception("La note doit être inférieure ou égale à 5.");
         }
+        $this->id = $id;
         $this->user = $user;
         $this->commentaire = $commentaire;
         $this->note = $note;
@@ -67,6 +69,11 @@ class Avis
         $html .= "</div>";
 
         return $html;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function getNote(): int

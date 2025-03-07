@@ -32,9 +32,9 @@ class DetailController extends Controller
         if(!$restau){
             $this->redirectTo('/');
         }
-        $avis = new Avis($_SESSION["user"], $_POST['commentaire'], (int)$_POST['note'], $restau);
+        $avis = new Avis($jp->getMaxAvisId()+1, $_SESSION["user"], $_POST['commentaire'], (int)$_POST['note'], $restau);
         $jp->addAvis($avis);
-        $tousAvis = $jp->getAvis($restau);
+        $tousAvis = $jp->getAvisByRestaurant($restau);
         $restau->setAvis($tousAvis);
         $this->render('detail', ['restau' => $restau]);
     }
