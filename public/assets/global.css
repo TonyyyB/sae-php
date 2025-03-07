@@ -9,3 +9,74 @@ body {
     background-color: #FBF0E9;
     color: #333;
 }
+
+/* Style header */
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ddccb2;
+    padding: 10px;
+}
+.title{
+    display: flex;
+}
+.title-link{
+    display:flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #805050;
+    text-decoration: none;
+}
+.logo{
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+}
+.button {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #FBF0E9;
+    text-decoration: none;
+    width: auto;
+    background-color: #805050;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.username{
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #805050;
+}
+.user{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+/* Style footer */
+.footer {
+    background-color: #ddccb2;
+    color: #805050;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    font-weight: bold;
+}
+

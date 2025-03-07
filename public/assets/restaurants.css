@@ -5,72 +5,6 @@
     text-align: center;
 }
 
-.opening-hours-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 1rem;
-    text-align: left;
-}
-
-.opening-hours-table-pretty td {
-    border: 1px solid #ddd;
-    padding: 12px;
-}
-
-.opening-hours-table-pretty .opening-hours-row-even {
-    background-color: #fadecc;
-}
-
-.restaurant-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.restaurant-card {
-    background-color: #fae9de;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    width: 250px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.restaurant-card-detail {
-    text-decoration: none;
-}
-
-.restaurant-card h3 {
-    margin-top: 0;
-    color: #805050;
-}
-
-.restaurant-card p {
-    margin: 5px 0;
-}
-
-/* Stars */
-
-.stars-container {
-    position: relative;
-    display: inline-block;
-    font-size: 2rem;
-    color: #ccc;
-}
-
-.stars-filled {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    color: gold;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
 /* Mise en page responsive */
 @media (min-width: 768px) {
     .restaurant-general {
@@ -111,7 +45,7 @@
 }
 
 /* Section avis */
-.avis-section {
+/* .avis-section {
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #ddd;
@@ -123,7 +57,7 @@
     margin-bottom: 15px;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+} */
 
 /* Formulaire trier les restaurants */
 form div {

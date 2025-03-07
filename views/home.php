@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - IUTables'O</title>
-    <link rel="stylesheet" href="/assets/styles.css">
-    <link rel="stylesheet" href="/assets/header.css">
-    <link rel="stylesheet" href="/assets/footer.css">
+    <!-- Ne garder que les règles utiles, il n'y en a pas beaucoup -->
+    <!-- <link rel="stylesheet" href="/assets/styles.css"> -->
+    <link rel="stylesheet" href="/assets/card.css">
+    <link rel="stylesheet" href="/assets/global.css">
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
 </head>
 
