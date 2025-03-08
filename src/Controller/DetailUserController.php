@@ -23,14 +23,17 @@ class DetailUserController extends Controller
             $this->redirectTo("/");
         }
         $jp = new JsonProvider();
-        $restau = $jp->getById($param);
-        if(!$restau){
-            $this->redirectTo('/');
+        $avis = $jp->getAvisById((int)$_POST['id']);
+        if(!$avis){
+            $this->redirectTo("/detailUser");
         }
-        $avis = new Avis($_SESSION["user"], $_POST['commentaire'], (int)$_POST['note'], $restau);
-        $jp->addAvis($avis);
-        $tousAvis = $jp->getAvisByUser($_SESSION["user"]);
-        $_SESSION["user"]->setAvis($tousAvis);
-        $this->render('detailUser', ['avis' => $avis]);
+        if($_POST['action'] === 'delete'){
+            $jp->deleteAvis($avis);
+        } else {
+            $avis->setCommentaire($_POST['commentaire']);
+            $avis->setNote((int)$_POST['note']);
+            $jp->editAvis($avis);
+        }
+        $this->redirectTo("/detailUser");
     }
 }

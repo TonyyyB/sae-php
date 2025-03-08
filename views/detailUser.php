@@ -22,4 +22,20 @@
     <?php require_once "static/footer.php";?>
 </body>
 
+<script>
+    function editAvis(id){
+        const avis = document.querySelector('.avis-'+id);
+        const edit = avis.querySelector('.edit');
+        const content = avis.querySelector('.avis-content');
+
+        if(edit.style.display === 'none'){
+            edit.style.display = 'block';
+            content.style.display = 'none';
+        } else {
+            edit.style.display = 'none';
+            content.style.display = 'block';
+        }
+    }
+</script>
+
 </html>
