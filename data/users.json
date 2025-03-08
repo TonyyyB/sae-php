@@ -10,5 +10,11 @@
         "nom": "toto",
         "prenom": "toto",
         "mdp": "31f7a65e315586ac198bd798b6629ce4903d0899476d5741a9f32e2e521b6a66"
+    },
+    {
+        "email": "xzazty@gmail.com",
+        "nom": "dazdazdazda",
+        "prenom": "azdazd",
+        "mdp": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
     }
 ]

@@ -28,7 +28,7 @@ class JsonProvider
         if(!empty($avisFilePath)) $this->avisFilePath = $avisFilePath;
     }
 
-    public function loadRestaurants(int $nb = -1, bool $loadAvis = false): array
+    public function loadRestaurants(int $nb = -1, bool $loadAvis = true): array
     {
         if (!file_exists($this->restaurantsFilePath)) {
             throw new \Exception("Le fichier JSON n'existe pas.");
