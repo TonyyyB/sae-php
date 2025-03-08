@@ -27,7 +27,7 @@
                     </tr>
                     <tr class="login-row">
                         <td class="login-label"></td>
-                        <td><input type="submit" value="Se connecter" class="button login-button login-field"></td>
+                        <td><input type="submit" value="Se connecter" class="button login-button"></td>
                     </tr>
                     <?php if (isset($err)): ?>
                         <tr class="login-row">
