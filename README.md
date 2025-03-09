@@ -87,8 +87,6 @@ Un utilisateur authentifié bénéficie de fonctionnalités supplémentaires :
 
 
 # Tests
-# Visualisation des résultats de la couverture
-
 Les résultats de la couverture sont générés au format **HTML** et sont situés dans le dossier `coverage`.
 
 ## 1. Visualiser le résultat global  
