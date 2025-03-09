@@ -238,7 +238,18 @@ class Restaurant
 
     public function renderDetail(bool $isConnected = false): string
     {
-        $html = "<div class='restaurant-general'><div class='restaurant-info'><h1>" . htmlspecialchars($this->getName()) . "</h1>";
+        $html = "<div class='restaurant-general'><div class='restaurant-info'><h1 style='display:flex; align-items:center;'>" . htmlspecialchars($this->getName());
+        if ($isConnected){
+            $html .= "<form action='/favoris/".$this->getOsmId()."' method='POST' style='display:inline;'>";
+            if ($_SESSION["user"]->isFavoris($this->getOsmId())){
+                $html .= "<button type='submit' style='color:yellow; background:none; border:none; font-size:1em;'>★</button>";
+            }
+            else{
+                $html .= "<button type='submit' style='color:black; background:none; border:none; font-size:1em;'>★</button>";
+            }
+            $html .= "</form>";
+        }
+        $html .= "</h1>";
         $html .= "<p>Type : " . ucfirst(str_replace("_", " ", $this->getType())) . "</p>";
 
         if (isset($this->cuisine) && !empty($this->cuisine)) {

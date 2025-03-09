@@ -3,18 +3,28 @@
         "email": "tony.beaujouan@etu.univ-orleans.fr",
         "nom": "Beaujouan",
         "prenom": "Tony",
-        "mdp": "967520ae23e8ee14888bae72809031b98398ae4a636773e18fff917d77679334"
+        "mdp": "967520ae23e8ee14888bae72809031b98398ae4a636773e18fff917d77679334",
+        "favoris": []
     },
     {
         "email": "toto@gmail.com",
         "nom": "toto",
         "prenom": "toto",
-        "mdp": "31f7a65e315586ac198bd798b6629ce4903d0899476d5741a9f32e2e521b6a66"
+        "mdp": "31f7a65e315586ac198bd798b6629ce4903d0899476d5741a9f32e2e521b6a66",
+        "favoris": []
     },
     {
         "email": "xzazty@gmail.com",
         "nom": "dazdazdazda",
         "prenom": "azdazd",
-        "mdp": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
+        "mdp": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
+        "favoris": [
+            "3422189698",
+            "9136326362",
+            "1313064359",
+            "12358260008",
+            "2296803475",
+            "2296779495"
+        ]
     }
 ]
