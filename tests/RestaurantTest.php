@@ -144,6 +144,7 @@ class RestaurantTest extends TestCase
     public function testAvis()
     {
         $avis = new Avis(
+            0,
             new User('john.doe@example.com', 'John', 'Doe', 'password'),
             'Great food!',
             5,

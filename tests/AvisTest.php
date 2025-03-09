@@ -43,7 +43,7 @@ class AvisTest extends TestCase
 
     public function testAvisCreation(): void
     {
-        $avis = new Avis($this->user, "Great food!", 5, $this->restaurant);
+        $avis = new Avis(0, $this->user, "Great food!", 5, $this->restaurant);
         $this->assertSame("Great food!", $avis->getCommentaire());
         $this->assertSame(5, $avis->getNote());
         $this->assertSame($this->user, $avis->getUser());
@@ -54,16 +54,16 @@ class AvisTest extends TestCase
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("La note doit être un entier positif.");
-        new Avis($this->user, "Bad food!", 0, $this->restaurant);
+        new Avis(0, $this->user, "Bad food!", 0, $this->restaurant);
     
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("La note doit être inférieure ou égale à 5.");
-        new Avis($this->user, "Bad food!", 6, $this->restaurant);
+        new Avis(0, $this->user, "Bad food!", 6, $this->restaurant);
     }
 
     public function testRenderStars(): void
     {
-        $avis = new Avis($this->user, "Good food!", 4, $this->restaurant);
+        $avis = new Avis(0, $this->user, "Good food!", 4, $this->restaurant);
         $starsHtml = $avis->renderStars();
         $this->assertStringContainsString("width: 80%;", $starsHtml);
         $this->assertStringContainsString("★★★★★", $starsHtml);
@@ -71,7 +71,7 @@ class AvisTest extends TestCase
 
     public function testRender(): void
     {
-        $avis = new Avis($this->user, "Excellent service!", 5, $this->restaurant);
+        $avis = new Avis(0, $this->user, "Excellent service!", 5, $this->restaurant);
         $avisHtml = $avis->render();
         $this->assertStringContainsString("Utilisateur : </strong>John Doe", $avisHtml);
         $this->assertStringContainsString("Commentaire : </strong>Excellent service!", $avisHtml);
@@ -91,7 +91,7 @@ class AvisTest extends TestCase
 
     public function testSetAndGetMethods(): void
     {
-        $avis = new Avis($this->user, "Good experience", 3, $this->restaurant);
+        $avis = new Avis(0, $this->user, "Good experience", 3, $this->restaurant);
         $avis->setCommentaire("Amazing experience!");
         $avis->setNote(4);
         $this->assertSame("Amazing experience!", $avis->getCommentaire());
@@ -102,7 +102,7 @@ class AvisTest extends TestCase
     {
         $newRestaurant = clone $this->restaurant;
         $newUser = new User('jane.doe@example.com', 'Doe', 'Jane', 'password');
-        $avis = new Avis($this->user, "Good experience", 4, $this->restaurant);
+        $avis = new Avis(0, $this->user, "Good experience", 4, $this->restaurant);
         
         $avis->setRestaurant($newRestaurant);
         $avis->setUser($newUser);
@@ -113,7 +113,7 @@ class AvisTest extends TestCase
 
     public function testSetNote(): void
     {
-        $avis = new Avis($this->user, "Good experience", 3, $this->restaurant);
+        $avis = new Avis(0, $this->user, "Good experience", 3, $this->restaurant);
         $avis->setNote(4);
         $this->assertSame(4, $avis->getNote());
     }
@@ -122,13 +122,13 @@ class AvisTest extends TestCase
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("La note doit être un entier positif.");
-        new Avis($this->user, "Commentaire test", 0, $this->restaurant);
+        new Avis(0, $this->user, "Commentaire test", 0, $this->restaurant);
     }
 
     public function testInvalidNoteTooHigh(): void
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("La note doit être inférieure ou égale à 5.");
-        new Avis($this->user, "Commentaire test", 6, $this->restaurant);
+        new Avis(0, $this->user, "Commentaire test", 6, $this->restaurant);
     }
 }
