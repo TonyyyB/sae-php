@@ -8,7 +8,6 @@ Ce dépôt GitHub concerne le projet **SAE 4.01 - Développement Web PHP** réal
 - **Lobjois Mathéo**  
 - **Mignan Baptiste**  
 
----
 
 ## Installation
 
@@ -54,8 +53,6 @@ http://localhost:8080
 
 3. Une fois le serveur lancé, maintenez Ctrl enfoncé et cliquez sur le lien affiché :
 http://localhost:8080
-
-
 
 
 # Fonctionnalités de l'application
