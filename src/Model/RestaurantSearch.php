@@ -8,7 +8,7 @@ class RestaurantSearch {
     }
 
     public function search(array $filters): array {
-        return array_filter($this->restaurants, function($restaurant) use ($filters) {
+        return array_values(array_filter($this->restaurants, function($restaurant) use ($filters) {
             if (!empty($filters['type']) && !in_array($restaurant->getType(), $filters['type'])) {
                 return false;
             }
@@ -43,6 +43,6 @@ class RestaurantSearch {
                 }
             }
             return true;
-        });
+        }));
     }
 }
