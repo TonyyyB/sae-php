@@ -1,0 +1,96 @@
+/* Main content */
+.main-content {
+    /* Utile ? */
+    text-align: center;
+}
+
+/* Formulaire trier les restaurants */
+form div {
+    margin-bottom: 1em;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 1.5em;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-button:hover {
+    background-color: #f9f9f9;
+}
+
+.dropdown-button:after {
+    content: "▼";
+}
+
+.checkbox-list {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.checkbox-list.active {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: auto;
+    max-height: 15em;
+}
+
+.checkbox-list li {
+    min-width: 12em;
+    min-height: 3.5em;
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.checkbox-list label {
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-list input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-list li:has(input[type="checkbox"]:checked) {
+    background-color: #ddccb2;
+    color: #805050;
+}
+
+form button{
+    transition: transform 0.1s ease, background-color 0.3s ease;
+    cursor: pointer;
+    padding: 1em 1.5em;
+    border: none;
+    border-radius: 15px;
+    margin: 0 0.5em;
+    background-color: #ddccb2;
+    color: #805050;
+    font-weight: bold;
+}
+
+form button:active {
+    transform: scale(0.9);
+}
