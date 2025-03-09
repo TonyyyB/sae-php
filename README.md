@@ -11,9 +11,9 @@ Ce dépôt GitHub concerne le projet **SAE 4.01 - Développement Web PHP** réal
 
 ## Installation
 
-Afin d'installer et de lancer notre projet, il vous faudra installer **Composer**. Nous vous conseillons de suivre ce tutoriel.
+Afin d'installer et de lancer notre projet, il vous faudra installer **Composer**. Nous vous conseillons de suivre [ce tutoriel](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-composer-on-ubuntu-20-04).
 
-Pour installer toutes les dépendances nécessaires au projet, veuillez lancer les commandes suivantes :
+Une fois composer installer, il faut installer toutes les dépendances nécessaires au projet en executant les commandes suivantes :
 
 ```bash
 composer update
