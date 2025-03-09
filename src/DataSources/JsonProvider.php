@@ -226,6 +226,21 @@ class JsonProvider
         return $modified;
     }
 
+    public function toggleFavoris()
+    {
+        $users = json_decode(file_get_contents($this->usersFilePath), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception("Erreur de décodage JSON: " . json_last_error_msg());
+        }
+        foreach ($users as &$currUser) {
+            if ($currUser["email"] === $_SESSION["user"]->getEmail()) {
+                $currUser["favoris"] = $_SESSION["user"]->getFavoris();
+                break;
+            }
+        }
+        file_put_contents($this->usersFilePath, json_encode($users, JSON_PRETTY_PRINT));
+    }
+
     public function addUser(User $user): bool
     {
         $users = json_decode(file_get_contents($this->usersFilePath), true);

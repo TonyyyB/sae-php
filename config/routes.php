@@ -41,5 +41,11 @@ return [
         'methods' => ['GET', 'POST'],
         'redirect' => '/',
         'requiresArgument' => false
+    ],
+    '/favoris' => [
+        'controller' => Iuto\SaePhp\Controller\FavorisController::class,
+        'methods' => ['POST'],
+        'redirect' => '/',
+        'requiresArgument' => true
     ]
 ];

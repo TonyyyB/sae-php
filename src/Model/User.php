@@ -1,6 +1,7 @@
 <?php
 
 namespace Iuto\SaePhp\Model;
+use Iuto\SaePhp\DataSources\JsonProvider;
 class User
 {
     private string $email;
@@ -17,6 +18,7 @@ class User
         $this->prenom = $prenom;
         $this->mdp = $mdp;
         $this->avis = [];
+        $this->favoris = [];
     }
 
     public function setAvis(array $avis): void
@@ -79,6 +81,31 @@ class User
         $this->mdp = $mdp;
     }
 
+    public function getFavoris(): array
+    {
+        return $this->favoris;
+    }
+
+    public function setFavoris(array $favoris): void
+    {
+        $this->favoris = $favoris;
+    }
+
+    public function isFavoris($id): bool
+    {
+        return in_array($id, $this->favoris);
+    }
+
+    public function toggleFavoris($id): void
+    {
+        if ($this->isFavoris($id)){
+            array_splice($this->favoris, array_search($id, $this->favoris));
+        }
+        else{
+            array_push($this->favoris, $id);
+        }
+    }
+
     public function toArray(): array
     {
         return [
@@ -86,17 +113,20 @@ class User
             'nom' => $this->nom,
             'prenom' => $this->prenom,
             'mdp' => $this->mdp,
+            'favoris' => $this->favoris
         ];
     }
 
     public static function fromArray(array $data): self
     {
-        return new self(
+        $user = new self(
             $data['email'],
             $data['nom'],
             $data['prenom'],
             $data['mdp']
         );
+        $user->setFavoris($data['favoris']);
+        return $user;
     }
 
     public function renderDetail(): string
@@ -112,6 +142,19 @@ class User
             }
         } else {
             $html .= "<p>Aucun avis pour le moment.</p>";
+        }
+        // Favoris
+        if (count($this->getFavoris()) > 0){
+            $html .= "<h3>Favoris de l'utilisateur</h3>";
+            $jp = new JsonProvider();
+            $restaurants = $jp->loadRestaurants();
+            $html .= "<div class='restaurant-list'>";
+            foreach ($restaurants as $restau) {
+                if ($this->isFavoris($restau->getOsmId())){
+                    $html .= $restau->renderCard();
+                }
+            }
+            $html .= "</div>";
         }
         return $html;
     }
