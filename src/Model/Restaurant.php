@@ -101,62 +101,70 @@ class Restaurant
     }
 
     function parseOpeningHours(?string $openingHours): ?array
-    {
-        if ($openingHours === null) {
+{
+    if ($openingHours === null || trim($openingHours) === '') {
+        return null;
+    }
+
+    $hours = array_fill(0, 7, "");
+
+    $dayMap = [
+        "Mo" => 0,
+        "Tu" => 1,
+        "We" => 2,
+        "Th" => 3,
+        "Fr" => 4,
+        "Sa" => 5,
+        "Su" => 6,
+    ];
+
+    $segments = explode(';', $openingHours);
+
+    foreach ($segments as $segment) {
+        $segment = trim($segment);
+        if (!$segment) {
+            continue;
+        }
+
+        if (strpos($segment, ' ') === false) {
             return null;
         }
-        // Initialiser un tableau de 7 jours de la semaine avec des valeurs vides
-        $hours = array_fill(0, 7, "");
 
-        // Associer les abréviations des jours de la semaine à leurs indices
-        $dayMap = [
-            "Mo" => 0,
-            "Tu" => 1,
-            "We" => 2,
-            "Th" => 3,
-            "Fr" => 4,
-            "Sa" => 5,
-            "Su" => 6,
-        ];
+        list($daysPart, $hoursPart) = explode(' ', $segment, 2);
 
-        // Diviser l'entrée par les points-virgules pour séparer chaque plage de jours et horaires
-        $segments = explode(';', $openingHours);
+        if (strpos($daysPart, '-') !== false) {
+            list($startDay, $endDay) = explode('-', $daysPart);
 
-        foreach ($segments as $segment) {
-            // Supprimer les espaces inutiles et diviser les jours et horaires
-            $segment = trim($segment);
-            if (!$segment)
-                continue;
+            if (!isset($dayMap[$startDay]) || !isset($dayMap[$endDay])) {
+                return null;
+            }
 
-            list($daysPart, $hoursPart) = explode(' ', $segment, 2);
+            $startIndex = $dayMap[$startDay];
+            $endIndex = $dayMap[$endDay];
 
-            // Vérifier si c'est une plage de jours ou un seul jour
-            if (strpos($daysPart, '-') !== false) {
-                // Plage de jours (ex: "Mo-Th")
-                list($startDay, $endDay) = explode('-', $daysPart);
-                $startIndex = $dayMap[$startDay];
-                $endIndex = $dayMap[$endDay];
-
-                // Remplir tous les jours de la plage avec les horaires
-                for ($i = $startIndex; $i <= $endIndex; $i++) {
-                    $hours[$i] = $hoursPart;
+            for ($i = $startIndex; $i <= $endIndex; $i++) {
+                $hours[$i] = $hoursPart;
+            }
+        } elseif (strpos($daysPart, ',') !== false) {
+            $individualDays = explode(',', $daysPart);
+            foreach ($individualDays as $day) {
+                if (!isset($dayMap[$day])) {
+                    return null;
                 }
-            } elseif (strpos($daysPart, ',') !== false) {
-                // Liste de jours séparés par des virgules (ex: "Mo,We,Fr")
-                $individualDays = explode(',', $daysPart);
-                foreach ($individualDays as $day) {
-                    $dayIndex = $dayMap[$day];
-                    $hours[$dayIndex] = $hoursPart;
-                }
-            } else {
-                // Un seul jour (ex: "Fr")
-                $dayIndex = $dayMap[$daysPart];
+                $dayIndex = $dayMap[$day];
                 $hours[$dayIndex] = $hoursPart;
             }
+        } else {
+            if (!isset($dayMap[$daysPart])) {
+                return null;
+            }
+            $dayIndex = $dayMap[$daysPart];
+            $hours[$dayIndex] = $hoursPart;
         }
-
-        return $hours;
     }
+
+    return $hours;
+}
 
     public function renderOpeningHours(bool $pretty = false): string
     {
@@ -357,14 +365,14 @@ class Restaurant
         return $this->longitude;
     }
 
-    public function getOpeningHours(): array
+    public function getOpeningHours(): null|array
     {
         return $this->openingHours;
     }
 
-    public function getOsmId(): string
+    public function getOsmId(): int
     {
-        return $this->osmId;
+        return (int) $this->osmId;
     }
 
     public function getName(): string
