@@ -35,14 +35,15 @@ class UserTest extends TestCase
     public function testToArray()
     {
         $user = new User("test@example.com", "Doe", "John", "password123");
-        $expectedArray = [
+
+        $expected = [
             'email' => "test@example.com",
             'nom' => "Doe",
             'prenom' => "John",
             'mdp' => "password123",
         ];
-        
-        $this->assertEquals($expectedArray, $user->toArray());
+
+        $this->assertEquals($expected, $user->toArray());
     }
 
     public function testFromArray()
@@ -53,9 +54,9 @@ class UserTest extends TestCase
             'prenom' => "John",
             'mdp' => "password123",
         ];
-        
+
         $user = User::fromArray($data);
-        
+
         $this->assertEquals("test@example.com", $user->getEmail());
         $this->assertEquals("Doe", $user->getNom());
         $this->assertEquals("John", $user->getPrenom());
